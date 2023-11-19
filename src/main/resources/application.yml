@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookmngr
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        use_sql_comments: true
+        ansi:
+      output:
+          enabled: always
+
+server:
+  port: 8080
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+    doc-expansion: none
+    disable-swagger-default-url: false
+    api-docs:
+      path: /api-docs
+    show-actuator: false
+    default-consumes-media-type: application/json
+    default-produces-media-type: application/json
+    group-configs:
+      0:
+        group: all
+        paths-to-match: /**
+
+logging:
+  level:
+    org.hibernate:
+      orm:
+        jdbc:
+          bind: trace
