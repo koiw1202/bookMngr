@@ -30,7 +30,7 @@ public class BookCategoryRelationController {
     private final BookCategoryRelationService bookCategoryRelationService ;
 
     @Operation(summary = "책 - 카테고리 연관관계 변경" , description = "책 - 카테고리 연관관계 변경")
-    @PutMapping(name = "/bookCategoryRelation")
+    @PutMapping("/v1.0.0/bookCategoryRelation")
     public ApiResponse updateBookCategoryRelation(BookCategoryRelationDto bookCategoryRelationDto) throws ErrorHandler {
 
         if(bookCategoryRelationService.updateBookCategoryRelation(bookCategoryRelationDto))

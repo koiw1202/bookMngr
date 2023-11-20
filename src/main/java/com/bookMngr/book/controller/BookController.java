@@ -30,7 +30,7 @@ public class BookController {
     }
 
     @Operation(summary = "책 등록" , description = "책 등록 API")
-    @PostMapping(value = "/book")
+    @PostMapping(value = "/v1.0.0/book")
     public ApiResponse insertBook(@RequestBody BookDto bookDto) throws ErrorHandler {
 
         if(bookService.insertBook(bookDto))
@@ -41,7 +41,7 @@ public class BookController {
     }
 
     @Operation(summary = "책 조회" , description = "책 조회 API")
-    @GetMapping(value = "/book")
+    @GetMapping(value = "/v1.0.0/book")
     public ApiResponse selectBook(@RequestParam(required = true) Integer pageNo,
                                   @RequestParam(required = true) Integer pageSize,
                                   @RequestParam(required = true) String searchType ,
@@ -81,7 +81,7 @@ public class BookController {
     }
 
     @Operation(summary = "책 상태 변경" , description = "책 상태 변경 API")
-    @PutMapping(value = "/book")
+    @PutMapping(value = "/v1.0.0/book")
     public ApiResponse updateBookStatus(@Valid @RequestBody UpdateBookStatusDto updateBookStatusDto) throws ErrorHandler {
 
         if(this.bookService.updateBookStatus(updateBookStatusDto))

@@ -33,7 +33,11 @@ public class SelectBookDto {
     private Integer pageSize ;
 
     @NonNull
-    @Schema(name = "searchType", description = "조회 조건", example = "00", required = true)
+//    BOOK_SERACH_ALL("00", "전체 조회")
+//    ,TITLE_NAME("01", "책 제목")
+//    ,WRITER_NAME("02", "지은이")
+//    ,CATEGORY_ID("03", "카테고리 코드")
+    @Schema(name = "searchType", description = "조회 조건", example = "00 : 전체 // 01 : 책 제목 // 02 : 지은이 // 03 : 카테고리", required = true)
     private String searchType ;
 
     @Schema(name = "writer", description = "작가", example = "김성훈", required = false)

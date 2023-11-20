@@ -23,7 +23,7 @@ public class CategoryController {
     }
 
     @Operation(summary = "카테고리 등록" , description = "카테고리 등록 API")
-    @PostMapping(value = "/category")
+    @PostMapping(value = "/v1.0.0/category")
     public ApiResponse insertCategory(@Valid @RequestBody final CategoryDto categoryDto) throws ErrorHandler {
 
         if(categoryService.insertCategory(categoryDto))
