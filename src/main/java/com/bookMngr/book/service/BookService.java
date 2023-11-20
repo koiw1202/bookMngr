@@ -3,6 +3,7 @@ package com.bookMngr.book.service;
 import com.bookMngr.book.domain.Book;
 import com.bookMngr.book.model.BookDto;
 import com.bookMngr.book.model.SelectBookDto;
+import com.bookMngr.book.model.UpdateBookStatusDto;
 import com.bookMngr.book.model.response.SelectBookResultDto;
 import com.bookMngr.book.repository.BookRepo;
 import com.bookMngr.category.domain.Category;
@@ -85,9 +86,13 @@ public class BookService {
 
         return jpaQueryFactory
                 .select(Projections.bean(SelectBookResultDto.class,
-                    book.writer,
-                    book.title,
-                    category.categoryNm))
+                     book.bookId
+                    ,book.writer
+                    ,book.title
+                    ,category.categoryId
+                    ,category.categoryNm
+
+                ))
                 .from(book)
 
                 .innerJoin(bookCategoryRelation)
@@ -102,9 +107,21 @@ public class BookService {
                 .fetch() ;
     }
 
-//    private Predicate usernameEq(String usernameCond) {
-//        return usernameCond != null ? member.username.eq(usernameCond) : null;
-//    }
+    @Transactional
+    public boolean updateBookStatus(UpdateBookStatusDto updateBookStatusDto) {
+
+        long result = jpaQueryFactory.update(book)
+                                    .set(book.bookStatus, updateBookStatusDto.getBookStatusCd())
+                                    .where(book.bookId.eq(updateBookStatusDto.getBookId()))
+                                    .execute() ;
+
+        if(result == 1)
+            return true ;
+        else
+            return false ;
+
+    }
+
 }
 
 

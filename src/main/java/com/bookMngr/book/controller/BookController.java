@@ -1,7 +1,9 @@
 package com.bookMngr.book.controller;
 
+import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.bookMngr.book.model.BookDto;
 import com.bookMngr.book.model.SelectBookDto;
+import com.bookMngr.book.model.UpdateBookStatusDto;
 import com.bookMngr.book.model.response.SelectBookResultDto;
 import com.bookMngr.book.service.BookService;
 import com.bookMngr.common.CCConst;
@@ -13,6 +15,7 @@ import com.querydsl.core.BooleanBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,5 +80,13 @@ public class BookController {
             return ApiResponse.ok(CCConst.NO_DATA) ;
     }
 
+    @Operation(summary = "책 상태 변경" , description = "책 상태 변경 API")
+    @PutMapping(value = "/book")
+    public ApiResponse updateBookStatus(@Valid @RequestBody UpdateBookStatusDto updateBookStatusDto) throws ErrorHandler {
 
+        if(this.bookService.updateBookStatus(updateBookStatusDto))
+            return ApiResponse.ok(CCConst.UPDATE_SUCCESS) ;
+        else
+            throw new ErrorHandler(ErrorCode.BOOK_ERROR_008) ;
+    }
 }
