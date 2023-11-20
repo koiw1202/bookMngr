@@ -1,23 +1,25 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/bookmngr
+    url: jdbc:mysql://localhost:3306/bookMngr
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: admin
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
         use_sql_comments: true
-        ansi:
+        show_sql: true
+
       output:
           enabled: always
 
 server:
   port: 8080
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -37,7 +39,11 @@ springdoc:
 
 logging:
   level:
-    org.hibernate:
-      orm:
-        jdbc:
-          bind: trace
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace
+        type:
+          descriptor:
+            sql: trace
