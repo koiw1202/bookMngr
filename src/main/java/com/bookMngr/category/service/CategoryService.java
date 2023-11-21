@@ -9,6 +9,8 @@ import com.bookMngr.common.error.ErrorMessage;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -26,6 +28,7 @@ public class CategoryService {
         this.categoryRepo = categoryRepo;
     }
 
+    @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean insertCategory(final CategoryDto categoryDto) {
         CategoryDto categoryExist =
                 jpaQueryFactory

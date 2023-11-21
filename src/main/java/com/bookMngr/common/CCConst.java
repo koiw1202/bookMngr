@@ -20,4 +20,5 @@ public class CCConst {
     final public static String NO_DATA = "데이터가 존재하지 않습니다." ;
 
     final public static String UPDATE_SUCCESS = "성공적으로 변경되었습니다." ;
+
 }
