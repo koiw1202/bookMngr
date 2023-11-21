@@ -6,11 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class BookMngrApplicationTests {
 
-    @Test
-    void contextLoads() {
 
-
-
-    }
 
 }
