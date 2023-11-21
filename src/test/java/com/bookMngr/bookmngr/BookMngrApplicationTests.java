@@ -1,9 +1,8 @@
 package com.bookMngr.bookmngr;
 
-import com.bookMngr.common.CCConst;
 import com.bookMngr.common.code.CommCd;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,12 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.bookMngr.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,6 +28,18 @@ class BookMngrApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    JPAQueryFactory jpaQueryFactory ;
+
+    @Test
+    @Transactional
+    void deleteCategoryTest() {
+        long result = jpaQueryFactory.delete(bookCategoryRelation).execute();
+
+        System.out.println("result " + result) ;
+
+    }
 
     @Test
     void insertCategoryTest() throws Exception {
@@ -45,7 +58,7 @@ class BookMngrApplicationTests {
         for(Map bodyMap : requestList) {
             String content = new ObjectMapper().writeValueAsString(bodyMap) ;
             mockMvc.perform(
-                            MockMvcRequestBuilders.post("http://localhost:8080/category") // url
+                            MockMvcRequestBuilders.post("http://localhost:8080/v1.0.0/category") // url
                                     .contentType(MediaType.APPLICATION_JSON) // contentType 설정
                                     .content(content)
                     )
@@ -57,8 +70,9 @@ class BookMngrApplicationTests {
     }
 
     @Test
-    void insertBookTest() throws Exception {
+    void insertAndSelectBookTest() throws Exception {
 
+//      책 정보 넣기
         List<Map> requestList = new ArrayList<>() ;
 
         String[] bookTitleStrArr = {
@@ -129,7 +143,7 @@ class BookMngrApplicationTests {
         for(Map bodyMap : requestList) {
             String content = new ObjectMapper().writeValueAsString(bodyMap) ;
             mockMvc.perform(
-                            MockMvcRequestBuilders.post("http://localhost:8080/book") // url
+                            MockMvcRequestBuilders.post("http://localhost:8080/v1.0.0/book") // url
                                     .contentType(MediaType.APPLICATION_JSON) // contentType 설정
                                     .content(content)
                     )
@@ -138,5 +152,18 @@ class BookMngrApplicationTests {
                     .andExpect(jsonPath("code").value(CommCd.OK_CODE))
             ;
         }
+
+//      등록된 정보로 책 조회하기
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("http://localhost:8080/v1.0.0/book?pageNo=1&pageSize=10&searchType=00") // url
+                                .contentType(MediaType.APPLICATION_JSON) // contentType 설정
+//                                .content(content)
+                )
+                .andDo(print()) // api 수행내역 로그 출력
+                .andExpect(status().isOk()) // response status 200 검증
+                .andExpect(jsonPath("code").value(CommCd.OK_CODE))
+        ;
+
+
     }
 }
