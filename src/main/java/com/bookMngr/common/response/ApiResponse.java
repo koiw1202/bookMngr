@@ -6,7 +6,6 @@ import com.bookMngr.common.error.ErrorHandler;
 import lombok.*;
 
 @Getter
-@Setter
 @ToString
 @Builder
 @NoArgsConstructor

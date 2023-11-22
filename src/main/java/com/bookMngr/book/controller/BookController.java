@@ -31,7 +31,7 @@ public class BookController {
 
     @Operation(summary = "책 등록" , description = "책 등록 API")
     @PostMapping(value = "/v1.0.0/book")
-    public ApiResponse insertBook(@RequestBody BookDto bookDto) throws ErrorHandler {
+    public ApiResponse insertBook(@Valid @RequestBody BookDto bookDto) throws ErrorHandler {
 
         if(bookService.insertBook(bookDto))
             return ApiResponse.ok(CCConst.MERGE_SUCCESS) ;

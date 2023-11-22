@@ -1,9 +1,7 @@
 package com.bookMngr.bookCategory.service;
 
-import com.bookMngr.book.domain.Book;
 import com.bookMngr.bookCategory.model.BookCategoryRelationDto;
-import com.bookMngr.category.domain.Category;
-import com.bookMngr.bookCategory.repository.BookCategoryRepo;
+import com.bookMngr.bookCategory.repository.BookCategoryRepository;
 import com.bookMngr.common.error.ErrorHandler;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
@@ -30,7 +28,7 @@ import static com.bookMngr.bookCategory.domain.QBookCategoryRelation.bookCategor
 public class BookCategoryRelationService {
 
     private final JPAQueryFactory jpaQueryFactory ;
-    private final BookCategoryRepo bookCategoryRepo ;
+    private final BookCategoryRepository bookCategoryRepo ;
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean updateBookCategoryRelation(BookCategoryRelationDto bookCategoryRelationDto) {

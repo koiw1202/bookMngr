@@ -3,6 +3,7 @@ package com.bookMngr.bookCategory.domain;
 import com.bookMngr.book.domain.Book;
 import com.bookMngr.category.domain.Category;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,18 +21,17 @@ import java.io.Serializable;
  */
 @Embeddable
 @Getter
-@Setter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class BookCategoryRelationPK implements Serializable {
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOOK_ID")
     private Book book ;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category ;
 

@@ -14,11 +14,13 @@ package com.bookMngr.common;
 
 public class CCConst {
 
+    final public static String Y = "Y" ;
+    final public static String N = "N" ;
+
     final public static String MERGE_SUCCESS = "성공적으로 등록되었습니다." ;
     final public static String MERGE_FAIL = "내부 문제가 발생하였습니다." ;
     final public static String SELECT_SUCCESS = "성공적으로 조회되었습니다." ;
     final public static String NO_DATA = "데이터가 존재하지 않습니다." ;
-
     final public static String UPDATE_SUCCESS = "성공적으로 변경되었습니다." ;
 
 }

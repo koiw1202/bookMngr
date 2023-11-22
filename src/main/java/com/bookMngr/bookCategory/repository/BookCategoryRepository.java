@@ -15,6 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * -----------------------------------------------------------
  * 2023-11-20        FIC08709       최초 생성
  */
-public interface BookCategoryRepo extends JpaRepository <BookCategoryRelation, BookCategoryRelationPK> {
+public interface BookCategoryRepository extends JpaRepository <BookCategoryRelation, BookCategoryRelationPK> {
 
 }

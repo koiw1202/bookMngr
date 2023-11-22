@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @ToString
 @NoArgsConstructor
@@ -29,6 +28,7 @@ public class Book {
     private String bookStatus ;
 
     public Book(long bookId) {
+
         this.bookId = bookId ;
     }
 

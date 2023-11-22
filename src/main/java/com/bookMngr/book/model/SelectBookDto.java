@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Getter
-@Setter
 @Builder
 public class SelectBookDto {
 
