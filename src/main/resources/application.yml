@@ -1,4 +1,15 @@
 spring:
+  profiles:
+    group:
+      "local": "common, local"
+      "dev": "common, dev"
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: common
   datasource:
     url: jdbc:mysql://localhost:3306/bookmngr
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -6,17 +17,14 @@ spring:
     password: admin
   jpa:
     hibernate:
-      ddl-auto: update
-
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
         use_sql_comments: true
         show_sql: true
-
       output:
           enabled: always
-
 server:
   port: 8080
 
@@ -37,6 +45,8 @@ springdoc:
         group: all
         paths-to-match: /**
 
+---
+
 logging:
   level:
     org:
@@ -47,3 +57,4 @@ logging:
         type:
           descriptor:
             sql: trace
+

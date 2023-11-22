@@ -5,7 +5,7 @@ import com.bookMngr.book.model.BookDto;
 import com.bookMngr.book.model.SelectBookDto;
 import com.bookMngr.book.model.UpdateBookStatusDto;
 import com.bookMngr.book.model.response.SelectBookResultDto;
-import com.bookMngr.book.repository.BookRepo;
+import com.bookMngr.book.repository.BookRepository;
 import com.bookMngr.category.domain.Category;
 import com.bookMngr.common.code.BookSearchType;
 import com.bookMngr.common.code.BookStatusCd;
@@ -13,7 +13,7 @@ import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.bookCategory.domain.BookCategoryRelation;
 import com.bookMngr.bookCategory.domain.BookCategoryRelationPK;
-import com.bookMngr.bookCategory.repository.BookCategoryRepo;
+import com.bookMngr.bookCategory.repository.BookCategoryRepository;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -35,13 +35,13 @@ import static com.bookMngr.bookCategory.domain.QBookCategoryRelation.bookCategor
 public class BookService {
 
     private final JPAQueryFactory jpaQueryFactory ;
-    private final BookRepo bookRepo ;
-    private final BookCategoryRepo bookCategoryRepo ;
+    private final BookRepository bookRepository;
+    private final BookCategoryRepository bookCategoryRepo ;
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean insertBook(final BookDto bookDto) {
 
-        Book saveBookResult = bookRepo.save(
+        Book saveBookResult = bookRepository.save(
             Book.builder()
                 .title(bookDto.getTitle())
                 .writer(bookDto.getWriter())
