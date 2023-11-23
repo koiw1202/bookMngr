@@ -17,7 +17,7 @@ public class ExceptionController {
 
         log.error("SQLIntegrityConstraintViolationException ---> {}", errorHandler) ;
 
-        return ApiResponse.fail(ErrorMessage.MSG_BOOK_ERROR_001) ;
+        return ApiResponse.fail(ErrorMessage.MSG_ERROR_001) ;
 
     }
 

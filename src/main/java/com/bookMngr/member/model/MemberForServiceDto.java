@@ -20,9 +20,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberDtoForService {
+public class MemberForServiceDto {
 
     private String memberId ;
+    private String password ;
     private String nickNm ;
     private String unregYn ;
     private String rstYn ;
