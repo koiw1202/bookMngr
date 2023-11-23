@@ -49,6 +49,13 @@ springdoc:
 hibernate:
   default_batch_fetch_size: 1000
 
+jwt:
+  header: Authorization
+  secret: 236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492
+  expiredMinute: 30
+  refreshDays: 28
+
+
 ---
 
 logging:
