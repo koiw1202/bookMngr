@@ -1,6 +1,5 @@
 package com.bookMngr.bookmngr;
 
-import com.bookMngr.common.code.CommCd;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
@@ -22,6 +21,7 @@ import java.util.Map;
 
 import static com.bookMngr.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
 
+import static com.bookMngr.common.constant.CCConst.OK_CODE;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -69,7 +69,7 @@ class BookMngrApplicationTests {
                     )
                     .andDo(print()) // api 수행내역 로그 출력
                     .andExpect(status().isOk()) // response status 200 검증
-                    .andExpect(jsonPath("code").value(CommCd.OK_CODE))
+                    .andExpect(jsonPath("code").value(OK_CODE))
                     ;
         }
     }
@@ -154,7 +154,7 @@ class BookMngrApplicationTests {
                     )
                     .andDo(print()) // api 수행내역 로그 출력
                     .andExpect(status().isOk()) // response status 200 검증
-                    .andExpect(jsonPath("code").value(CommCd.OK_CODE))
+                    .andExpect(jsonPath("code").value(OK_CODE))
             ;
         }
 
@@ -166,7 +166,7 @@ class BookMngrApplicationTests {
                 )
                 .andDo(print()) // api 수행내역 로그 출력
                 .andExpect(status().isOk()) // response status 200 검증
-                .andExpect(jsonPath("code").value(CommCd.OK_CODE))
+                .andExpect(jsonPath("code").value(OK_CODE))
         ;
 
 
