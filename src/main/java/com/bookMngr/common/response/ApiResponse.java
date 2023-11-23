@@ -1,9 +1,13 @@
 package com.bookMngr.common.response;
 
-import com.bookMngr.common.code.CommCd;
 import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import lombok.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.util.MultiValueMap;
+
+import static com.bookMngr.common.constant.CCConst.* ;
 
 @Getter
 @ToString
@@ -17,59 +21,63 @@ final public class ApiResponse <T> {
     private String message ;
     private T data ;
 
-    public static ApiResponse ok(String message) {
+    public static HttpEntity ok(String message, Object data) {
+
+        return new HttpEntity(
+                ApiResponse.builder()
+                        .code(OK_CODE)
+                        .status(OK_STATUS)
+                        .message(message)
+                        .data(data)
+                        .build(),
+                null
+        ) ;
+    }
+
+    public static HttpEntity ok(String message, Object data, HttpHeaders headers) {
+
+        return new HttpEntity(
+                    ApiResponse.builder()
+                               .code(OK_CODE)
+                               .status(OK_STATUS)
+                               .message(message)
+                               .data(data)
+                               .build(),
+                    headers
+        ) ;
+    }
+
+    public static ApiResponse fail(String errorMessage) {
 
         return ApiResponse.builder()
-                .code(CommCd.OK_CODE)
-                .status(CommCd.OK_STATUS)
-                .message(message)
+                .code(FAIL_CODE)
+                .status(FAIL_STATUS)
+                .message(errorMessage)
                 .build() ;
     }
 
+    public static HttpEntity fail(ErrorCode errorCode) {
 
-    public static ApiResponse ok(String message, Object data) {
-
-        return ApiResponse.builder()
-                .code(CommCd.OK_CODE)
-                .status(CommCd.OK_STATUS)
-                .message(message)
-                .data(data)
-                .build() ;
+        return new HttpEntity(
+                ApiResponse.builder()
+                        .code(errorCode.getCode())
+                        .status(errorCode.getStatus())
+                        .message(errorCode.getMessage())
+                        .build() ,
+                null
+        ) ;
     }
 
-    public static ApiResponse fail(String message) {
+    public static HttpEntity fail(ErrorHandler errorHandler) {
 
-        return ApiResponse.builder()
-                .code(CommCd.FAIL_CODE)
-                .status(CommCd.FAIL_STATUS)
-                .message(message)
-                .build() ;
+        return new HttpEntity(
+                ApiResponse.builder()
+                        .code(errorHandler.getCode())
+                        .status(errorHandler.getStatus())
+                        .message(errorHandler.getMessage())
+                        .build() ,
+                null
+        ) ;
     }
 
-     public static ApiResponse fail(String message, String internalMeesage) {
-
-        return ApiResponse.builder()
-                .code(CommCd.FAIL_CODE)
-                .status(CommCd.FAIL_STATUS)
-                .message(message)
-                .build() ;
-    }
-
-    public static ApiResponse fail(ErrorCode errorCode) {
-
-        return ApiResponse.builder()
-                .code(CommCd.FAIL_CODE)
-                .status(errorCode.getStatus())
-                .message(errorCode.getMessage())
-                .build() ;
-    }
-
-    public static ApiResponse fail(ErrorHandler errorHandler) {
-
-        return ApiResponse.builder()
-                .code(errorHandler.getCode())
-                .status(errorHandler.getStatus())
-                .message(errorHandler.getMessage())
-                .build() ;
-    }
 }

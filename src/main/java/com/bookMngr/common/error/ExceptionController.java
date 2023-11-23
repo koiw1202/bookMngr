@@ -1,7 +1,9 @@
 package com.bookMngr.common.error;
 
+import com.bookMngr.common.constant.CCConst;
 import com.bookMngr.common.response.ApiResponse;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -22,7 +24,7 @@ public class ExceptionController {
     }
 
     @ExceptionHandler({ErrorHandler.class})
-    public ApiResponse handleException(ErrorHandler errorHandler) {
+    public HttpEntity handleException(ErrorHandler errorHandler) {
 
         log.error("ErrorHandler ---> {}", errorHandler) ;
 
@@ -31,11 +33,18 @@ public class ExceptionController {
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    public ApiResponse handleException(MethodArgumentNotValidException exception) {
+    public HttpEntity handleException(MethodArgumentNotValidException exception) {
 
         log.error("MethodArgumentNotValidException ---> {}", exception.getMessage()) ;
 
-        return ApiResponse.fail(exception.getMessage()) ;
+        return ApiResponse.fail(
+                ErrorHandler.builder()
+                        .status(400)
+                        .code(CCConst.FAIL_CODE)
+                        .message(exception.getMessage())
+                        .internalMessage("사용자 arg 오류")
+                        .build()
+        ) ;
     }
 
 }

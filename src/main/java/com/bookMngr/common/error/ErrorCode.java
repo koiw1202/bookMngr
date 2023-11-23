@@ -24,7 +24,8 @@ public enum ErrorCode {
 
     ,BOOK_CATEGORY_ERROR_001(500, "EC00010", ErrorMessage.MSG_ERROR_001, "책 - 카테고리 연관관계 변경 에러 발생")
 
-    ,MEMBER_ERROR_001(400, "EC0011", "존재하지 않는 회원입니다.", "회원의 아이디가 존재하지 않습니다.")
+    ,MEMBER_ERROR_001(400, "EC1000", "존재하지 않는 회원입니다.", "회원의 아이디가 존재하지 않습니다.")
+    ,MEMBER_ERROR_002(400, "EC1011", "회원 정보 변경에 실패하였습니다.", "회원 정보 변경시 내부 문제 발생.")
 
     ;
 
