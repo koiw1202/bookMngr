@@ -20,7 +20,6 @@ import java.io.Serializable;
  */
 @Embeddable
 @Getter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

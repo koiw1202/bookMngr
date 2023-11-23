@@ -9,8 +9,6 @@ import static com.bookMngr.common.error.ErrorMessage.* ;
 
 @Builder
 @Getter
-@Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryDto {

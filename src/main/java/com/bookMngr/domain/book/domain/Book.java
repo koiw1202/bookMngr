@@ -11,8 +11,6 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class Book {
 
     @Id @GeneratedValue
@@ -36,4 +34,7 @@ public class Book {
         this.bookId = bookId ;
     }
 
+    public Book() {
+
+    }
 }

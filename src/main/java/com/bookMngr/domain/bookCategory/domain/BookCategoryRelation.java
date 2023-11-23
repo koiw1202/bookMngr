@@ -19,8 +19,6 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Builder
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
 public class BookCategoryRelation {
 
@@ -28,5 +26,7 @@ public class BookCategoryRelation {
     private BookCategoryRelationPK bookCategoryRelationPK ;
 
 
+    public BookCategoryRelation() {
 
+    }
 }
