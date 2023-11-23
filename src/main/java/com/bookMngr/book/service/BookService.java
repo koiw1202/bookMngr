@@ -71,7 +71,7 @@ public class BookService {
         return true ;
     }
 
-    public List<SelectBookResultDto> selectBook(SelectBookDto selectBookDto) {
+    public List<SelectBookResultDto> getBookInfo(SelectBookDto selectBookDto) {
 
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -108,7 +108,7 @@ public class BookService {
     }
 
     @Transactional
-    public boolean updateBookStatus(UpdateBookStatusDto updateBookStatusDto) {
+    public boolean setBookStatus(UpdateBookStatusDto updateBookStatusDto) {
 
         long result = jpaQueryFactory.update(book)
                                     .set(book.bookStatus, updateBookStatusDto.getBookStatusCd())
@@ -123,24 +123,3 @@ public class BookService {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

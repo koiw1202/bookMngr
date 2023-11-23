@@ -1,10 +1,12 @@
 package com.bookMngr.book.domain;
 
 
+import com.bookMngr.bookCategory.domain.BookCategoryRelation;
 import com.bookMngr.category.domain.Category;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +28,9 @@ public class Book {
 
     @Column(name = "BOOK_STATUS", length = 2, nullable = false)
     private String bookStatus ;
+
+    @OneToMany(mappedBy = "bookCategoryRelationPK.book", fetch = FetchType.LAZY)
+    private List<BookCategoryRelation> bookCategoryRelation ;
 
     public Book(long bookId) {
 

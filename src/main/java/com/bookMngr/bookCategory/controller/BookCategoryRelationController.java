@@ -2,7 +2,7 @@ package com.bookMngr.bookCategory.controller;
 
 import com.bookMngr.bookCategory.model.BookCategoryRelationDto;
 import com.bookMngr.bookCategory.service.BookCategoryRelationService;
-import com.bookMngr.common.CCConst;
+import com.bookMngr.common.constant.CCConst;
 import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.common.response.ApiResponse;

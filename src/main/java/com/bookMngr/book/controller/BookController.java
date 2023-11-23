@@ -1,17 +1,15 @@
 package com.bookMngr.book.controller;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.bookMngr.book.model.BookDto;
 import com.bookMngr.book.model.SelectBookDto;
 import com.bookMngr.book.model.UpdateBookStatusDto;
 import com.bookMngr.book.model.response.SelectBookResultDto;
 import com.bookMngr.book.service.BookService;
-import com.bookMngr.common.CCConst;
+import com.bookMngr.common.constant.CCConst;
 import com.bookMngr.common.code.BookSearchType;
 import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.common.response.ApiResponse;
-import com.querydsl.core.BooleanBuilder;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,7 +63,7 @@ public class BookController {
         }
 
         List<SelectBookResultDto> resultList =
-                bookService.selectBook(SelectBookDto.builder()
+                bookService.getBookInfo(SelectBookDto.builder()
                                                     .pageNo(pageNo)
                                                     .pageSize(pageSize)
                                                     .categoryId(categoryId)
@@ -84,7 +82,7 @@ public class BookController {
     @PutMapping(value = "/v1.0.0/book")
     public ApiResponse updateBookStatus(@Valid @RequestBody UpdateBookStatusDto updateBookStatusDto) throws ErrorHandler {
 
-        if(this.bookService.updateBookStatus(updateBookStatusDto))
+        if(this.bookService.setBookStatus(updateBookStatusDto))
             return ApiResponse.ok(CCConst.UPDATE_SUCCESS) ;
         else
             throw new ErrorHandler(ErrorCode.BOOK_ERROR_008) ;
