@@ -5,10 +5,10 @@
 * Gradle
 * SpringBoot MVC (2.7.8)
 * JPA
+* Querydsl
 * Spring AOP
 * Spring Security (예정)
 * Spring Batch (예정)
-* Querydsl
 * MySql
 * Redis(예정)
 
