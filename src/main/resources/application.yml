@@ -17,7 +17,7 @@ spring:
     password: admin
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
@@ -25,6 +25,7 @@ spring:
         show_sql: true
       output:
           enabled: always
+    open-in-view: false
 server:
   port: 8080
 
@@ -45,6 +46,9 @@ springdoc:
         group: all
         paths-to-match: /**
 
+hibernate:
+  default_batch_fetch_size: 1000
+
 ---
 
 logging:
@@ -57,4 +61,3 @@ logging:
         type:
           descriptor:
             sql: trace
-
