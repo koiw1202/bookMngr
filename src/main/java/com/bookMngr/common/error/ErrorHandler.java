@@ -35,4 +35,6 @@ public class ErrorHandler extends RuntimeException {
 
     }
 
+    public ErrorHandler(String number) {
+    }
 }

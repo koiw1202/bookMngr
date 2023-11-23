@@ -38,6 +38,12 @@ public class Member {
     @Column(length = 12, nullable = true)
     private String nickNm ;
 
+    @Column(length = 2, nullable = false)
+    private String memberGrade ;
+
+    @Column(length = 1, nullable = false)
+    private String authGrade ;
+
 //    탈퇴여부
     @Column(length = 1, nullable = false)
     private String unregYn ;

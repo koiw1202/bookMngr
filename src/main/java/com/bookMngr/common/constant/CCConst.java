@@ -22,5 +22,6 @@ public class CCConst {
     final public static String SELECT_SUCCESS = "성공적으로 조회되었습니다." ;
     final public static String NO_DATA = "데이터가 존재하지 않습니다." ;
     final public static String UPDATE_SUCCESS = "성공적으로 변경되었습니다." ;
+    final public static String MEMBER_JOIN_SUCCESS = "성공적으로 가입되었습니다." ;
 
 }

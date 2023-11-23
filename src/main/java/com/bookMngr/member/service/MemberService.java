@@ -1,9 +1,13 @@
 package com.bookMngr.member.service;
 
 import com.bookMngr.common.constant.CCConst;
+import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.member.domain.Member;
+import com.bookMngr.member.model.MemberDto;
+import com.bookMngr.member.model.MemberForResDto;
 import com.bookMngr.member.model.MemberForServiceDto;
+import com.bookMngr.member.model.MemberLoginDto;
 import com.bookMngr.member.repository.MemberRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -11,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Optional;
 
@@ -37,31 +42,48 @@ public class MemberService {
         return hasText(memberId) ? member.memberId.eq(memberId) : null ;
     }
 
-    public void joinMember(final MemberForServiceDto memberForServiceDto) {
+    public MemberForResDto joinMember(final MemberForServiceDto memberForServiceDto) {
 
         Member existMember = jpaQueryFactory.selectFrom(member)
                 .where(memberIdEq(memberForServiceDto.getMemberId()))
                 .fetchOne() ;
 
+//      중복된 계정이 있다면 예외처리
         Optional.ofNullable(existMember)
-            .ifPresentOrElse(existMemberInnerVar -> {
-                throw new ErrorHandler(EXIST_ID) ;
+                .orElseThrow(() -> new ErrorHandler(EXIST_ID)) ;
 
+//      회원가입 처리
+        Member joinMemberEntity = memberRepository.save(
+            Member.builder()
+                    .memberId(memberForServiceDto.getMemberId())
+                    .password(memberForServiceDto.getPassword())
+                    .nickNm(memberForServiceDto.getNickNm())
+                    .unregYn(CCConst.N)
+                    .rstYn(CCConst.N)
+                    .regerDt(new Timestamp(System.currentTimeMillis()))
+                    .build()) ;
 
-            }, () -> {
-                memberRepository.save(
-                        Member.builder()
-                                .memberId(memberForServiceDto.getMemberId())
-                                .password(memberForServiceDto.getPassword())
-                                .nickNm(memberForServiceDto.getNickNm())
-                                .unregYn(CCConst.N)
-                                .rstYn(CCConst.N)
-                                .regerDt(new Timestamp(System.currentTimeMillis()))
-                                .build()
-                ) ;
-            }) ;
+        return MemberForResDto.builder()
+                .regerDt(joinMemberEntity.getRegerDt())
+                .nickNm(joinMemberEntity.getNickNm())
+                .build() ;
 
     } //End of joinMember
+
+    @Transactional
+    public boolean chngMemberInfo(final MemberLoginDto memberLoginDto) {
+
+        Long result = jpaQueryFactory.update(member)
+                                     .where(memberIdEq(memberLoginDto.getMemberId()))
+                                     .execute() ;
+
+        if(result == 0 || result >= 2)
+            throw new ErrorHandler(ErrorCode.MEMBER_ERROR_001) ;
+        else
+            return true ;
+
+    }
+
 }
 
 
