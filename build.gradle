@@ -42,6 +42,8 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-sql:${queryDslVersion}"
     implementation "com.querydsl:querydsl-sql-spring"
+    testImplementation 'org.projectlombok:lombok:1.18.28'
+    testImplementation 'org.projectlombok:lombok:1.18.28'
     annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
 
     /** 롬복 */
@@ -72,6 +74,9 @@ dependencies {
 
     /** redis */
     implementation('org.springframework.boot:spring-boot-starter-data-redis')
+
+    /** Spring Security */
+    implementation "org.springframework.boot:spring-boot-starter-security"
 
 }
 

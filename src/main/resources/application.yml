@@ -1,5 +1,5 @@
 spring:
   profiles:
     group:
-      "local": "comm, local"
-      "dev": "comm, dev"
+      "local": "comm, local, auth"
+      "dev": "comm, dev, auth"
