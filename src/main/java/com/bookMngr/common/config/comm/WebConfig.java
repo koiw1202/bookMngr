@@ -1,4 +1,4 @@
-package com.bookMngr.common.config;
+package com.bookMngr.common.config.comm;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

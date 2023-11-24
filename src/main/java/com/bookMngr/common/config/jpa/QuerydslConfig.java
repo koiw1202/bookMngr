@@ -1,4 +1,4 @@
-package com.bookMngr.common.config;
+package com.bookMngr.common.config.jpa;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.persistence.EntityManager;

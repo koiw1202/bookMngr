@@ -1,0 +1,71 @@
+
+# DB, JPA 관련 설정
+
+hibernate:
+  default_batch_fetch_size: 1000
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        use_sql_comments: true
+        show_sql: true
+      output:
+        enabled: always
+    open-in-view: false
+  redis:
+#    host: 10.0.2.15
+    host: 192.168.219.103
+    port: 6379
+    password:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookmngr
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: admin
+
+# 서버 config 관련 설정
+server:
+  port: 8080
+
+# Swagger 관련 설정
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+    doc-expansion: none
+    disable-swagger-default-url: false
+    api-docs:
+      path: /api-docs
+    show-actuator: false
+    default-consumes-media-type: application/json
+    default-produces-media-type: application/json
+    group-configs:
+      0:
+        group: all
+        paths-to-match: /**
+
+# JWT 관련 설정
+
+jwt:
+  header: Authorization
+  secret: 236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492
+  expiredMinute: 30
+  refreshDays: 28
+
+# 로깅 관련 설정
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace
+        type:
+          descriptor:
+            sql: trace
