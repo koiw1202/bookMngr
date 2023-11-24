@@ -7,7 +7,7 @@
 * JPA
 * Querydsl
 * Spring AOP
-* Spring Security (예정)
+* Spring Security
 * Spring Batch (예정)
 * MySql
 * Redis(예정)
