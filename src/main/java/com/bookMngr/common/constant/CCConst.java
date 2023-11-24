@@ -28,5 +28,6 @@ public class CCConst {
     final public static String UPDATE_SUCCESS = "성공적으로 변경되었습니다." ;
     final public static String MEMBER_JOIN_SUCCESS = "성공적으로 가입되었습니다." ;
     final public static String ISSUE_TOKEN_SUCCESS = "성공적으로 발급되었습니다." ;
+    final public static String ARGUMENT_NOT_VALID = "데이터 형식이 잘못되었습니다." ;
 
 }

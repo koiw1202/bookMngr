@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Builder
 @ToString
+@AllArgsConstructor
 public class Book {
 
     @Id @GeneratedValue

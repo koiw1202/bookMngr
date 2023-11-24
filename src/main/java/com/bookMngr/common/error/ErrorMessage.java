@@ -10,6 +10,8 @@ public class ErrorMessage {
 
 //  COMMON
     public static final String MSG_ERROR_001 = "내부 문제가 발생하였습니다.\n관리자에게 문의해주세요." ;
+    public static final String MSG_ERROR_002 = "토큰 유효시간이 만료됐습니다." ;
+    public static final String MSG_ERROR_003 = "접근권한이 없습니다." ;
 
 //  MEMBER
     public static final String MSG_MEMBER_ERROR_001 = "아이디는 문자 또는 숫자로만 구성돼 있어야 합니다." ;
