@@ -69,6 +69,10 @@ dependencies {
 
     /** AOP */
     implementation('org.springframework.boot:spring-boot-starter-aop')
+
+    /** redis */
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
+
 }
 
 tasks.named('bootBuildImage') {
