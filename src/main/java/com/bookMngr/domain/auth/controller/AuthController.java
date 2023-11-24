@@ -6,12 +6,16 @@ import com.bookMngr.domain.auth.model.PayloadDto;
 import com.bookMngr.domain.auth.model.UserAuthInfoDto;
 import com.bookMngr.domain.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 import static com.bookMngr.common.constant.CCConst.ISSUE_TOKEN_SUCCESS;
 
@@ -24,13 +28,16 @@ import static com.bookMngr.common.constant.CCConst.ISSUE_TOKEN_SUCCESS;
  */
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
     private final AuthService authService ;
 
 
     @PostMapping("/v1.0.0/auth/token")
-    public HttpEntity permitLogin(final UserAuthInfoDto userAuthInfoDto) {
+    public HttpEntity permitLogin(@Valid @RequestBody final UserAuthInfoDto userAuthInfoDto) {
+
+        log.info("parameter ----> {}", userAuthInfoDto) ;
 
         TokenVO tokenVO = authService.getToken(
                         PayloadDto.builder()

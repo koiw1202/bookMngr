@@ -1,12 +1,18 @@
 package com.bookMngr.common.jwt;
 
+import com.bookMngr.common.jwt.vo.PayloadVo;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import javax.validation.Payload;
 import java.security.Key;
+import java.util.Map;
 
 /**
  * description    : 토큰의 key 값 초기화와 유효성 검사를 수행하는 클레스
@@ -17,25 +23,54 @@ import java.security.Key;
  */
 @Component
 @Slf4j
-public class TokenManagement {
-
-    private final Key secretKey ;
+public class TokenManagement extends TokenValidation{
 
     public TokenManagement(@Value("${jwt.secret}") final String secret ) {
-        this.secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+        super(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)));
     }
 
     /**
      * JWT의 유효성 체크
      */
-    public boolean validationCheckToken(String token){
+    public boolean validationCheckToken(String token) {
         try{
-            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
+            super.parsingJwt(token) ;
             return true;
         } catch (Exception e) {
-            log.info("-----> Token Validation Fail {}", e.getMessage()) ;
             return false;
         }
     }
 
+    /**
+     * JWT의 페이로드 영역을 vo로 객체로 변환해주는 메소드
+     */
+    public PayloadVo jwtToPayload(String token) {
+
+        Jws<Claims> jwts = super.parsingJwt(token);
+
+        Map<String, Object> payloadMap = jwts.getBody() ;
+
+        return PayloadVo.builder()
+                .userGrade(String.valueOf(payloadMap.get("userGrade")))
+                .userGrant(String.valueOf(payloadMap.get("userGrant")))
+                .userCd(String.valueOf(payloadMap.get("userCd")))
+                .build();
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
