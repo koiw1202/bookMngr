@@ -13,7 +13,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserGrantType {
+public enum MemberGrantType {
 
      M("M", "마스터 권한")
     ,C("C", "회사 권한")

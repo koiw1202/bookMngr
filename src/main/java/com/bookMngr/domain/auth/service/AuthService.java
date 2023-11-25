@@ -24,9 +24,9 @@ public class AuthService {
 
         return tokenFactory.issueAllToken(
                 PayloadVo.builder()
-                         .userCd(payloadDto.getUserCd())
-                         .userGrade(payloadDto.getUserGrade())
-                         .userGrant(payloadDto.getUserGrant())
+                         .memberCd(payloadDto.getMemberCd())
+                         .memberGrade(payloadDto.getMemberGrade())
+                         .memberGrant(payloadDto.getMemberGrant())
                          .build()) ;
 
     }

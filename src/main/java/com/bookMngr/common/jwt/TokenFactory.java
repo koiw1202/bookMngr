@@ -45,9 +45,9 @@ public class TokenFactory {
     public TokenVO issueAllToken(final PayloadVo payloadVo) {
 
         Map<String, Object> payloads = new HashMap<>();
-        payloads.put("userCd", payloadVo.getUserCd()) ;
-        payloads.put("userGrant", payloadVo.getUserGrant()) ;
-        payloads.put("userGrade", payloadVo.getUserGrade()) ;
+        payloads.put("userCd", payloadVo.getMemberCd()) ;
+        payloads.put("userGrant", payloadVo.getMemberGrant()) ;
+        payloads.put("userGrade", payloadVo.getMemberGrade()) ;
 
         return TokenVO.builder()
                 .accessToken(this.createToken(payloads, LocalDateTime.now().plusMinutes(expiredMinute)))

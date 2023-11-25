@@ -1,6 +1,9 @@
-package com.bookMngr.common.jwt.vo;
+package com.bookMngr.domain.member.model.res;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+
+import java.sql.Timestamp;
 
 /**
  * description    :
@@ -11,12 +14,9 @@ import lombok.*;
  */
 @Getter
 @Builder
-@ToString
-public class PayloadVo {
+public class MemberForResDto {
 
-    private String memberGrade ;
-    private String memberGrant ;
-    private String memberCd ;
-
+    private String nickNm ;
+    private Timestamp regerDt ;
 
 }

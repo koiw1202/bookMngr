@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.bookMngr.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
+import static com.bookMngr.domain.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
 
 /**
  * packageName    : com.bookMngr.relation.bookCategory.service

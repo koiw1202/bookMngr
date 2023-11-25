@@ -3,9 +3,9 @@ package com.bookMngr.domain.book.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * packageName    : com.bookMngr.book.model
@@ -23,19 +23,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Builder
 public class SelectBookDto {
 
-    @NonNull
+    @NotBlank
     @Schema(name = "pageNo", description = "1", example = "현재 페이지", required = true)
     private Integer pageNo ;
 
-    @NonNull
+    @NotBlank
     @Schema(name = "pageSize", description = "10", example = "페이지 사이즈", required = true)
     private Integer pageSize ;
 
-    @NonNull
-//    BOOK_SERACH_ALL("00", "전체 조회")
-//    ,TITLE_NAME("01", "책 제목")
-//    ,WRITER_NAME("02", "지은이")
-//    ,CATEGORY_ID("03", "카테고리 코드")
+    @NotBlank
     @Schema(name = "searchType", description = "조회 조건", example = "00 : 전체 // 01 : 책 제목 // 02 : 지은이 // 03 : 카테고리", required = true)
     private String searchType ;
 

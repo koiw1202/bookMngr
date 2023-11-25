@@ -1,13 +1,12 @@
 package com.bookMngr.domain.member.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.bookMngr.common.code.MemberGradeType;
+import com.bookMngr.common.code.MemberGrantType;
+import com.bookMngr.common.constant.CCConst;
+import com.bookMngr.domain.member.model.res.MemberForServiceDto;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -23,13 +22,20 @@ import java.sql.Timestamp;
  */
 @Entity
 @Getter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@TableGenerator(
+        name = "MEMBER_SEQ_GENERATOR",
+        table = "sequence_all",
+        pkColumnValue = "MEMBER_SEQ",
+        allocationSize = 1
+)
 public class Member {
 
-    @Id
-    @Column(name = "Member_ID", length = 15)
+    @Id @GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
+    private long memberCd ;
+
+    @Column(name = "Member_ID", length = 15, unique = true, nullable = false)
     private String memberId ;
 
     @Column(length = 200, nullable = false)
@@ -42,7 +48,10 @@ public class Member {
     private String memberGrade ;
 
     @Column(length = 1, nullable = false)
-    private String authGrade ;
+    private String memberGrant ;
+
+    @Column(length = 12, nullable = false)
+    private String phoneNumber ;
 
 //    탈퇴여부
     @Column(length = 1, nullable = false)
@@ -54,5 +63,20 @@ public class Member {
 
     @Column(nullable = false)
     private Timestamp regerDt ;
+
+    @Builder
+    public Member(MemberForServiceDto memberForServiceDto) {
+
+        this.memberId = memberForServiceDto.getMemberId() ;
+        this.password = memberForServiceDto.getPassword() ;
+        this.nickNm = memberForServiceDto.getNickNm() ;
+        this.unregYn = CCConst.N ;
+        this.rstYn = CCConst.N ;
+        this.memberGrade = MemberGradeType.WELCOME_LEVEL.getCode() ;
+        this.memberGrant = MemberGrantType.U.getCode() ;
+        this.phoneNumber = memberForServiceDto.getPhoneNumber();
+        this.regerDt = new Timestamp(System.currentTimeMillis()) ;
+
+    }
 
 }

@@ -78,6 +78,10 @@ dependencies {
     /** Spring Security */
     implementation "org.springframework.boot:spring-boot-starter-security"
 
+    /** restTemplate */
+    implementation 'org.apache.httpcomponents:httpclient'
+//    implementation 'com.google.code.gson:gson:2.8.5'
+
 }
 
 tasks.named('bootBuildImage') {

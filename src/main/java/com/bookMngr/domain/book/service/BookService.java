@@ -25,10 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.bookMngr.book.domain.QBook.book ;
-import static com.bookMngr.category.domain.QCategory.category;
-import static com.bookMngr.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
-
+import static com.bookMngr.domain.book.domain.QBook.book;
+import static com.bookMngr.domain.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
+import static com.bookMngr.domain.category.domain.QCategory.category;
 
 @Service
 @RequiredArgsConstructor

@@ -20,16 +20,16 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class UserAuthInfoDto {
 
-    @NotBlank(message = "userGrade는 필수입력 값입니다.")
-    @Schema(name = "userGrade" , description = "유저등급" , example = "GOLD" , required = true)
-    private String userGrade ;
+    @NotBlank(message = "memberGrade는 필수입력 값입니다.")
+    @Schema(name = "memberGrade" , description = "유저등급" , example = "GOLD" , required = true)
+    private String memberGrade ;
 
-    @NotBlank(message = "userGrant는 필수입력 값입니다.")
-    @Schema(name = "userGrant" , description = "유저권한" , example = "M" , required = true)
-    private String userGrant ;
+    @NotBlank(message = "memberGrant는 필수입력 값입니다.")
+    @Schema(name = "memberGrant" , description = "유저권한" , example = "M" , required = true)
+    private String memberGrant ;
 
-    @NotBlank(message = "userCd는 필수입력 값입니다.")
-    @Schema(name = "userCd" , description = "유저코드" , example = "U0000000001" , required = true)
-    private String userCd ;
+    @NotBlank(message = "memberCd는 필수입력 값입니다.")
+    @Schema(name = "memberCd" , description = "유저코드" , example = "U0000000001" , required = true)
+    private String memberCd ;
 
 }

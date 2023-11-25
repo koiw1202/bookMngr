@@ -2,10 +2,12 @@ package com.bookMngr.domain.member.controller;
 
 import com.bookMngr.common.constant.CCConst;
 import com.bookMngr.common.response.ApiResponse;
-import com.bookMngr.domain.member.model.MemberDto;
-import com.bookMngr.domain.member.model.MemberForServiceDto;
-import com.bookMngr.domain.member.model.MemberForResDto;
-import com.bookMngr.domain.member.model.MemberLoginDto;
+import com.bookMngr.domain.member.controller.dto.ChngMemberInfoDto;
+import com.bookMngr.domain.member.controller.dto.MemberDto;
+import com.bookMngr.domain.member.controller.dto.MemberLoginDto;
+import com.bookMngr.domain.member.model.*;
+import com.bookMngr.domain.member.model.res.MemberForResDto;
+import com.bookMngr.domain.member.model.res.MemberForServiceDto;
 import com.bookMngr.domain.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -38,17 +40,18 @@ public class MemberController {
     private final MemberService memberService ;
 
     @Operation(summary = "회원가입" , description = "회원가입 API")
-    @PostMapping(name = "/v1.0.0/member")
+    @PostMapping("/v1.0.0/member")
     public HttpEntity joinMember(@Valid @RequestBody final MemberDto memberDto) {
 
         MemberForResDto memberForResDto = memberService.joinMember(
-            new MemberForServiceDto()
+            MemberForServiceDto
                     .builder()
                     .memberId(memberDto.getMemberId())
                     .password(memberDto.getPassword())
                     .nickNm(memberDto.getNickNm())
                     .rstYn(CCConst.N)
                     .unregYn(CCConst.N)
+                    .phoneNumber(memberDto.getPhoneNumber())
                     .build()
         ) ;
 
@@ -56,11 +59,29 @@ public class MemberController {
     }
 
     @Operation(summary = "회원정보 변경" , description = "회원정보 변경 관련 API")
-    @PutMapping(name = "/v1.0.0/member")
-    public HttpEntity chngMemberInfo(@Valid @RequestBody final MemberLoginDto memberLoginDto) {
+    @PutMapping("/v1.0.0/member")
+    public HttpEntity chngMemberInfo(@Valid @RequestBody ChngMemberInfoDto chngMemberInfoDto) {
 
-        return memberService.chngMemberInfo(memberLoginDto) == true ?
+        return memberService.chngMemberInfo(
+                ChngMemberInfoForSerDto
+                        .builder()
+                        .nickNm(chngMemberInfoDto.getNickNm())
+                        .password(chngMemberInfoDto.getPassword())
+                        .build()) == true ?
             ApiResponse.ok(CCConst.UPDATE_SUCCESS, null) : ApiResponse.fail(MEMBER_ERROR_002);
+
+    }
+
+
+    @Operation(summary = "로그인", description = "로그인 관련 API")
+    @PostMapping("/v1.0.0/login")
+    public HttpEntity doSignIn(@Valid @RequestBody final MemberLoginDto memberLoginDto) {
+
+        return memberService.doSignIn(
+                MemberLoginForServiceDto.builder()
+                                        .memberId(memberLoginDto.getMemberId())
+                                        .password(memberLoginDto.getPassword())
+                                        .build()) ;
 
     }
 }

@@ -65,3 +65,14 @@ logging:
         type:
           descriptor:
             sql: trace
+
+
+# RestTemplate 설정
+
+network:
+  time:
+    connection: 2000
+    read: 20000
+  rt:
+    max-conn: 50
+    max-per-route: 20

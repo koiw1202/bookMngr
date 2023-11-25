@@ -51,9 +51,9 @@ public class TokenManagement extends TokenValidation{
         Map<String, Object> payloadMap = jwts.getBody() ;
 
         return PayloadVo.builder()
-                .userGrade(String.valueOf(payloadMap.get("userGrade")))
-                .userGrant(String.valueOf(payloadMap.get("userGrant")))
-                .userCd(String.valueOf(payloadMap.get("userCd")))
+                .memberGrade(String.valueOf(payloadMap.get("userGrade")))
+                .memberGrant(String.valueOf(payloadMap.get("userGrant")))
+                .memberCd(String.valueOf(payloadMap.get("userCd")))
                 .build();
     }
 

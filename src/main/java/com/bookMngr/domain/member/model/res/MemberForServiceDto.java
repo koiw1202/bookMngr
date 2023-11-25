@@ -1,4 +1,4 @@
-package com.bookMngr.domain.member.model;
+package com.bookMngr.domain.member.model.res;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,5 +27,6 @@ public class MemberForServiceDto {
     private String nickNm ;
     private String unregYn ;
     private String rstYn ;
+    private String phoneNumber ;
 
 }

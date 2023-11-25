@@ -35,9 +35,9 @@ public class UserAuthHolderService {
                     this.threadHolder.remove();
                     this.threadHolder.set(
                             UserAuthVO.builder()
-                                    .userGrant(svo.getUserGrant())
-                                    .userCd(svo.getUserCd())
-                                    .userGrade(svo.getUserGrade())
+                                    .userGrant(svo.getMemberGrant())
+                                    .userCd(svo.getMemberCd())
+                                    .userGrade(svo.getMemberGrade())
                                     .build()
                     ) ;
                 }, () -> {

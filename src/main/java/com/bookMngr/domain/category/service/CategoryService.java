@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static com.bookMngr.category.domain.QCategory.category;
-
+import static com.bookMngr.domain.category.domain.QCategory.category;
 
 @Service
 public class CategoryService {
@@ -37,7 +36,7 @@ public class CategoryService {
                         .where(category.categoryNm.eq(categoryDto.getCategoryNm()))
                         .fetchOne() ;
 
-        Optional.ofNullable(categoryExist)
+            Optional.ofNullable(categoryExist)
                 .ifPresentOrElse(vo -> {
                     throw new ErrorHandler(ErrorCode.CATEGORY_ERROR_002) ;
                 }, () -> {

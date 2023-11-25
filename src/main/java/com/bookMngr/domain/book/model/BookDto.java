@@ -3,6 +3,9 @@ package com.bookMngr.domain.book.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 @Builder
 @Getter
 @ToString
@@ -10,15 +13,15 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BookDto {
 
-    @NonNull
+    @NotBlank
     @Schema(name = "writer", description = "작가", example = "김성훈", required = true)
     private String writer ;
 
-    @NonNull
+    @NotBlank
     @Schema(name = "title",  description = "책 제목" , example = "JPA 기본서", required = true)
     private String title ;
 
-    @NonNull
+    @NotBlank
     @Schema(name = "categoryId",  description = "카테고리" , example = "1", required = true)
     private long categoryId ;
 

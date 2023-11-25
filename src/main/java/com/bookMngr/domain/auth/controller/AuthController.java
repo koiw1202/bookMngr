@@ -9,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,13 +24,12 @@ import static com.bookMngr.common.constant.CCConst.ISSUE_TOKEN_SUCCESS;
  * -----------------------------------------------------------
  * 2023-11-23        koiw1       최초 생성
  */
-@RestController
+@RestController("/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
 
     private final AuthService authService ;
-
 
     @PostMapping("/v1.0.0/auth/token")
     public HttpEntity permitLogin(@Valid @RequestBody final UserAuthInfoDto userAuthInfoDto) {
@@ -41,16 +38,11 @@ public class AuthController {
 
         TokenVO tokenVO = authService.getToken(
                         PayloadDto.builder()
-                                .userCd(userAuthInfoDto.getUserCd())
-                                .userGrade(userAuthInfoDto.getUserGrade())
-                                .userGrant(userAuthInfoDto.getUserGrant())
+                                .memberCd(userAuthInfoDto.getMemberCd())
+                                .memberGrade(userAuthInfoDto.getMemberGrade())
+                                .memberGrant(userAuthInfoDto.getMemberGrant())
                                 .build()
         ) ;
-        HttpEntity httpEntity = new HttpEntity(null, new HttpHeaders(){{
-            add("accessToken", tokenVO.getAccessToken());
-            add("refreshToken", tokenVO.getRefreshToken());
-        }
-        }) ;
 
         return ApiResponse.ok(ISSUE_TOKEN_SUCCESS, null,  new HttpHeaders(){{
                 add("accessToken", tokenVO.getAccessToken());

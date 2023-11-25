@@ -19,9 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.bookMngr.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
-
 import static com.bookMngr.common.constant.CCConst.OK_CODE;
+import static com.bookMngr.domain.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -171,15 +170,6 @@ class BookMngrApplicationTests {
 
 
     }
-
-
-    @Test
-    public void test() {
-        boolean test = StringUtils.hasText("TET") ;
-        Assert.isTrue(test, "성공");
-
-    }
-
 
 }
 

@@ -6,7 +6,6 @@ import com.bookMngr.common.error.ErrorResponse;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
