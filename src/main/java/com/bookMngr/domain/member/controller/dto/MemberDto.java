@@ -1,13 +1,14 @@
 package com.bookMngr.domain.member.controller.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 
 import static com.bookMngr.common.constant.RegExpConstants.*;
 import static com.bookMngr.common.error.ErrorMessage.*;

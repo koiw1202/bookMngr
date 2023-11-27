@@ -1,9 +1,9 @@
 package com.bookMngr.domain.auth.service;
 
-import com.bookMngr.domain.auth.model.PayloadDto;
 import com.bookMngr.common.jwt.TokenFactory;
 import com.bookMngr.common.jwt.vo.PayloadVo;
 import com.bookMngr.common.jwt.vo.TokenVO;
+import com.bookMngr.domain.auth.model.PayloadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

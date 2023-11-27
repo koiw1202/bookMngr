@@ -1,6 +1,8 @@
 package com.bookMngr.domain.bookCategory.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

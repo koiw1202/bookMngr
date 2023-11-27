@@ -2,7 +2,10 @@ package com.bookMngr.domain.book.domain;
 
 
 import com.bookMngr.domain.bookCategory.domain.BookCategoryRelation;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;

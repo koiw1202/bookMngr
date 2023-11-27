@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * packageName    : com.bookMngr.book.model
@@ -21,7 +20,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Builder
-public class SelectBookDto {
+public class BookInfoDto {
 
     @NotBlank
     @Schema(name = "pageNo", description = "1", example = "현재 페이지", required = true)

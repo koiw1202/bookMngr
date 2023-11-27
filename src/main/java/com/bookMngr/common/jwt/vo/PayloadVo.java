@@ -1,6 +1,8 @@
 package com.bookMngr.common.jwt.vo;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 /**
  * description    :

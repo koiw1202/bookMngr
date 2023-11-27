@@ -2,16 +2,12 @@ package com.bookMngr.domain.member.controller;
 
 import com.bookMngr.common.auth.UserAuthHolderService;
 import com.bookMngr.common.auth.UserAuthProvider;
-import com.bookMngr.common.code.PAYLOAD_TYPE;
 import com.bookMngr.common.restTemplate.ResponseVO;
 import com.bookMngr.common.restTemplate.RestTemplateUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;

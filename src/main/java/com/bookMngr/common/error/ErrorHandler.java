@@ -1,6 +1,8 @@
 package com.bookMngr.common.error;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @Builder

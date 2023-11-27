@@ -1,11 +1,14 @@
 package com.bookMngr.domain.category.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
-import static com.bookMngr.common.error.ErrorMessage.* ;
+import static com.bookMngr.common.error.ErrorMessage.MSG_CATEGORY_ERROR_001;
 
 @Builder
 @Getter

@@ -3,9 +3,6 @@ package com.bookMngr.domain.auth.model;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-
 /**
  * description    : Controller로부터 받은 페이로드 정보를 담는 클레스
  * ===========================================================

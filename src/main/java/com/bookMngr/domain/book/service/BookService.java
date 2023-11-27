@@ -1,21 +1,19 @@
 package com.bookMngr.domain.book.service;
 
-import com.bookMngr.domain.book.domain.Book;
-import com.bookMngr.domain.book.model.BookDto;
-import com.bookMngr.domain.book.model.SelectBookDto;
-import com.bookMngr.domain.book.model.UpdateBookStatusDto;
-import com.bookMngr.domain.book.model.response.SelectBookResultDto;
-import com.bookMngr.domain.book.repository.BookRepository;
-import com.bookMngr.domain.category.domain.Category;
-import com.bookMngr.common.code.BookSearchType;
 import com.bookMngr.common.code.BookStatusCd;
 import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
+import com.bookMngr.domain.book.domain.Book;
+import com.bookMngr.domain.book.model.BookDto;
+import com.bookMngr.domain.book.model.BookInfoDto;
+import com.bookMngr.domain.book.model.UpdateBookStatusDto;
+import com.bookMngr.domain.book.model.response.SelectBookResultDto;
+import com.bookMngr.domain.book.repository.BookQueryRepository;
+import com.bookMngr.domain.book.repository.BookRepository;
 import com.bookMngr.domain.bookCategory.domain.BookCategoryRelation;
 import com.bookMngr.domain.bookCategory.domain.BookCategoryRelationPK;
 import com.bookMngr.domain.bookCategory.repository.BookCategoryRepository;
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Projections;
+import com.bookMngr.domain.category.domain.Category;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,10 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.bookMngr.domain.book.domain.QBook.book;
-import static com.bookMngr.domain.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
-import static com.bookMngr.domain.category.domain.QCategory.category;
-
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -36,6 +30,7 @@ public class BookService {
     private final JPAQueryFactory jpaQueryFactory ;
     private final BookRepository bookRepository;
     private final BookCategoryRepository bookCategoryRepo ;
+    private final BookQueryRepository bookQueryRepository;
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean insertBook(final BookDto bookDto) {
@@ -70,49 +65,16 @@ public class BookService {
         return true ;
     }
 
-    public List<SelectBookResultDto> getBookInfo(SelectBookDto selectBookDto) {
+    public List<SelectBookResultDto> getBookInfo(BookInfoDto bookInfoDto) {
 
-        BooleanBuilder builder = new BooleanBuilder();
+        return bookQueryRepository.selectBookInfo(bookInfoDto) ;
 
-//      대여가능 상태인 항목으로 filtering
-        builder.and(book.bookStatus.eq(BookStatusCd.BOOK_STATUS_OK.getCode())) ;
-
-        switch (BookSearchType.convertCodeToType(selectBookDto.getSearchType())) {
-            case CATEGORY_ID -> builder.and(category.categoryId.eq(selectBookDto.getCategoryId())) ;
-            case TITLE_NAME -> builder.and(book.title.contains(selectBookDto.getTitle())) ;
-            case WRITER_NAME -> builder.and(book.writer.contains(selectBookDto.getWriter())) ;
-        }
-
-        return jpaQueryFactory
-                .select(Projections.bean(SelectBookResultDto.class,
-                     book.bookId
-                    ,book.writer
-                    ,book.title
-                    ,category.categoryId
-                    ,category.categoryNm
-
-                ))
-                .from(book)
-
-                .innerJoin(bookCategoryRelation)
-                .on(bookCategoryRelation.bookCategoryRelationPK.book.bookId.eq(book.bookId))
-
-                .innerJoin(category)
-                .on(category.categoryId.eq(bookCategoryRelation.bookCategoryRelationPK.category.categoryId))
-
-                .where(builder)
-                .offset((selectBookDto.getPageNo() -1) * selectBookDto.getPageSize() )
-                .limit(selectBookDto.getPageSize())
-                .fetch() ;
     }
 
-    @Transactional
-    public boolean setBookStatus(UpdateBookStatusDto updateBookStatusDto) {
+    @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
+    public boolean setBookStatus(final UpdateBookStatusDto updateBookStatusDto) {
 
-        long result = jpaQueryFactory.update(book)
-                                    .set(book.bookStatus, updateBookStatusDto.getBookStatusCd())
-                                    .where(book.bookId.eq(updateBookStatusDto.getBookId()))
-                                    .execute() ;
+        long result = bookQueryRepository.updateBookStatus(updateBookStatusDto);
 
         if(result == 1)
             return true ;
