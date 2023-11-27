@@ -2,6 +2,7 @@ package com.bookMngr.domain.bookCategory.service;
 
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.domain.bookCategory.model.BookCategoryRelationDto;
+import com.bookMngr.domain.bookCategory.repository.BookCategoryQueryRepository;
 import com.bookMngr.domain.bookCategory.repository.BookCategoryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
@@ -27,16 +28,12 @@ import static com.bookMngr.domain.bookCategory.domain.QBookCategoryRelation.book
 @AllArgsConstructor
 public class BookCategoryRelationService {
 
-    private final JPAQueryFactory jpaQueryFactory ;
-    private final BookCategoryRepository bookCategoryRepo ;
+    private final BookCategoryQueryRepository bookCategoryQueryRepository ;
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
-    public boolean updateBookCategoryRelation(BookCategoryRelationDto bookCategoryRelationDto) {
+    public boolean changeBookCategoryRelation(BookCategoryRelationDto bookCategoryRelationDto) {
 
-        long result = jpaQueryFactory.update(bookCategoryRelation)
-                                    .set(bookCategoryRelation.bookCategoryRelationPK.category.categoryId, bookCategoryRelationDto.getCategoryId())
-                                    .where(bookCategoryRelation.bookCategoryRelationPK.book.bookId.eq(bookCategoryRelationDto.getBookId()))
-                                    .execute() ;
+        long result = bookCategoryQueryRepository.updateBookCategoryRelation(bookCategoryRelationDto) ;
 
         if(result == 1)
             return true ;

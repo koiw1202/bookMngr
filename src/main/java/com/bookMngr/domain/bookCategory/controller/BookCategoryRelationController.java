@@ -32,9 +32,9 @@ public class BookCategoryRelationController {
 
     @Operation(summary = "책 - 카테고리 연관관계 변경" , description = "책 - 카테고리 연관관계 변경")
     @PutMapping("/v1.0.0/bookCategoryRelation")
-    public HttpEntity updateBookCategoryRelation(BookCategoryRelationDto bookCategoryRelationDto) throws ErrorHandler {
+    public HttpEntity changeBookCategoryRelation(BookCategoryRelationDto bookCategoryRelationDto) throws ErrorHandler {
 
-        if(bookCategoryRelationService.updateBookCategoryRelation(bookCategoryRelationDto))
+        if(bookCategoryRelationService.changeBookCategoryRelation(bookCategoryRelationDto))
             return ApiResponse.ok(CCConst.MERGE_SUCCESS, null) ;
 
         else
