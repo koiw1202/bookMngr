@@ -4,12 +4,14 @@ package com.bookMngr.common.config.security;
 import com.bookMngr.common.auth.UserAuthHolderService;
 import com.bookMngr.common.auth.UserAuthProvider;
 import com.bookMngr.common.config.security.filter.JwtAuthenticationFilter;
+import com.bookMngr.common.config.security.filter.LogFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 /**
  * description    :
@@ -34,8 +36,9 @@ public class SecurityConfig {
         this.defaultSetHttpSecurity(http) ;
 
         return http.authorizeRequests()
+                .antMatchers("/**/**/bo/manager/**").hasAnyAuthority("ROLE_M", "ROLE_C")
+                .antMatchers("/**/**/bo/company/**").hasAuthority("ROLE_C")
                 .antMatchers("/*/**").permitAll()
-                .anyRequest().authenticated()
                 .and()
                 .build() ;
     }
@@ -50,6 +53,7 @@ public class SecurityConfig {
                 .headers().frameOptions().sameOrigin().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .addFilterBefore(new LogFilter(), LogoutFilter.class)
                 .addFilterBefore(new JwtAuthenticationFilter(userAuthProvider, userAuthHolderService) , UsernamePasswordAuthenticationFilter.class) ;
 
         return http;

@@ -4,6 +4,10 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * description    : HttpEntity의 값에 Builder를 적용한 클레스
@@ -22,8 +26,17 @@ public class HttpProtocol<T> extends HttpEntity {
     @Builder
     public HttpProtocol(T body, HttpHeaders headers) {
         super(body, headers) ;
+
+
         this.body = body;
-        this.headers = headers ;
+
+        if(headers == null) {
+            this.headers = new HttpHeaders() ;
+        } else {
+            this.headers = headers ;
+        }
+
+        this.headers.add("Content-Type", "application/json");
 
     }
 }

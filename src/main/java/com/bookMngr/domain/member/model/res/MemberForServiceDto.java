@@ -1,5 +1,6 @@
 package com.bookMngr.domain.member.model.res;
 
+import com.bookMngr.common.code.MemberGrantType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class MemberForServiceDto {
 
     private String memberId ;

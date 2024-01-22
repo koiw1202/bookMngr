@@ -42,7 +42,5 @@ public enum BookSearchType {
         } catch (Exception e) {
           throw new ErrorHandler(ErrorCode.BOOK_ERROR_007) ;
         }
-
-
     }
 }

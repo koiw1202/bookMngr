@@ -3,6 +3,7 @@ package com.bookMngr.common.restTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,7 +27,7 @@ public class RestTemplateUtil {
         this.restTemplate = restTemplate;
     }
 
-    public ResponseVO get(String uri, HttpEntity entity, Map<String, String> queryStringMap) {
+    public ResponseEntity get(String uri, HttpEntity entity, Map<String, String> queryStringMap) {
 
         Set<Map.Entry<String, String>> set = queryStringMap.entrySet() ;
         String queryString = set.stream()
@@ -36,8 +37,8 @@ public class RestTemplateUtil {
         return this.httpCommunication(String.join("", uri, "?", queryString), HttpMethod.GET, entity);
     }
 
-    public ResponseVO httpCommunication(String uri, HttpMethod httpMethod, HttpEntity entity) {
-        return restTemplate.exchange(uri, httpMethod, entity, ResponseVO.class).getBody() ;
+    public ResponseEntity httpCommunication(String uri, HttpMethod httpMethod, HttpEntity entity) {
+        return restTemplate.exchange(uri, httpMethod, entity, ResponseVO.class) ;
     }
 
 

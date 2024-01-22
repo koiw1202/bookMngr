@@ -13,12 +13,17 @@ import com.bookMngr.domain.member.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+
+import java.util.Map;
 
 import static com.bookMngr.common.constant.CCConst.MEMBER_JOIN_SUCCESS;
 import static com.bookMngr.common.error.ErrorCode.MEMBER_ERROR_002;
@@ -77,12 +82,18 @@ public class MemberController {
     @Operation(summary = "로그인", description = "로그인 관련 API")
     @PostMapping("/v1.0.0/login")
     public HttpEntity doSignIn(@Valid @RequestBody final MemberLoginDto memberLoginDto) {
-
-        return memberService.doSignIn(
+        Map<String, Object> body = memberService.doSignIn(
                 MemberLoginForServiceDto.builder()
-                                        .memberId(memberLoginDto.getMemberId())
-                                        .password(memberLoginDto.getPassword())
-                                        .build()) ;
+                        .memberId(memberLoginDto.getMemberId())
+                        .password(memberLoginDto.getPassword())
+                        .build()) ;
+
+        MultiValueMap<String, String> headerMap = new LinkedMultiValueMap<>() ;
+
+        headerMap.add("accessToken", body.get("accessToken").toString());
+        headerMap.add("refreshToken", body.get("refreshToken").toString());
+
+        return ApiResponse.ok("성공적으로 로그인되었습니다.", null, new HttpHeaders(headerMap)) ;
 
     }
 }

@@ -6,7 +6,8 @@ import com.bookMngr.common.auth.vo.UserAuthVO;
 import com.bookMngr.common.code.PAYLOAD_TYPE;
 import com.bookMngr.common.jwt.vo.PayloadVo;
 import com.bookMngr.common.restTemplate.RestTemplateUtil;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpEntity;
@@ -62,13 +63,12 @@ public class UtilTest {
         System.out.println(userAuthProvider.getUserInfo(PAYLOAD_TYPE.GRADE));
     }
 
-
     @Autowired
     RestTemplateUtil restTemplateUtil ;
+
     /**
      * RestTmeplate 테스트용 메소드
      */
-
     @Test
     public void restTmeplateTest() {
         Map<String, String> body = new HashMap<>(){{
@@ -76,17 +76,57 @@ public class UtilTest {
             put("pageSize", String.valueOf(10)) ;
             put("searchType", "00") ;
         }} ;
-
         HttpEntity entity = new HttpEntity(body) ;
-
         System.out.println(restTemplateUtil.get("http://localhost:8080/v1.0.0/book", entity, body));
+    }
 
+    @BeforeAll
+    public static void junit5Test1() {
+        System.out.println("junit5 Test1 started");
+    }
+
+    @BeforeEach
+    public void junit5Test2() {
+        System.out.println("junit5 Test2 started");
+    }
+
+    @Test
+    public void junit5Test3() {
+        System.out.println("junit5 Test3 started") ;
+    }
+
+    @AfterEach
+    public void junit5Test41() {
+        System.out.println("junit5 Test41 started");
+    }
+
+    @AfterEach
+    public void junit5Test42() {
+        System.out.println("junit5 Test42 started");
+    }
+
+    @AfterEach
+    public void junit5Test4() {
+        System.out.println("junit5 Test4 started");
+    }
+
+    @AfterAll
+    public static void junit5Test5() {
+        System.out.println("junit5 Test5 started");
     }
 
 
-
-
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

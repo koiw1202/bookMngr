@@ -6,7 +6,7 @@ import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.common.response.ApiResponse;
 import com.bookMngr.domain.book.model.BookDto;
-import com.bookMngr.domain.book.model.SelectBookDto;
+import com.bookMngr.domain.book.model.BookInfoDto;
 import com.bookMngr.domain.book.model.UpdateBookStatusDto;
 import com.bookMngr.domain.book.model.response.SelectBookResultDto;
 import com.bookMngr.domain.book.service.BookService;
@@ -64,7 +64,7 @@ public class BookController {
         }
 
         List<SelectBookResultDto> resultList =
-                bookService.getBookInfo(SelectBookDto.builder()
+                bookService.getBookInfo(BookInfoDto.builder()
                                                     .pageNo(pageNo)
                                                     .pageSize(pageSize)
                                                     .categoryId(categoryId)
@@ -88,4 +88,31 @@ public class BookController {
         else
             throw new ErrorHandler(ErrorCode.BOOK_ERROR_008) ;
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,7 +22,7 @@ public class UserAuthHolderService {
 
     public UserAuthHolderService(TokenManagement tokenManagement) {
         this.tokenManagement = tokenManagement;
-        this.threadHolder = new ThreadLocal<>() ;
+        this.threadHolder = new InheritableThreadLocal<>() ;
     }
 
     /**
@@ -43,7 +43,6 @@ public class UserAuthHolderService {
                 }, () -> {
 
                 });
-
     }
 
     /**

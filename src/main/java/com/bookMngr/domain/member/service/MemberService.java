@@ -10,18 +10,20 @@ import com.bookMngr.domain.member.model.ChngMemberInfoForSerDto;
 import com.bookMngr.domain.member.model.MemberLoginForServiceDto;
 import com.bookMngr.domain.member.model.res.MemberForResDto;
 import com.bookMngr.domain.member.model.res.MemberForServiceDto;
-import com.bookMngr.domain.member.repository.MemberQueryRepository;
 import com.bookMngr.domain.member.repository.MemberRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.bookMngr.common.error.ErrorCode.EXIST_ID;
@@ -43,18 +45,16 @@ public class MemberService {
 
     private final JPAQueryFactory jpaQueryFactory ;
     private final MemberRepository memberRepository ;
-    private final MemberQueryRepository memberQueryRepository ;
     private final RestTemplateUtil restTemplateUtil ;
 
     private BooleanExpression memberIdEq(final String memberId) {
         return hasText(memberId) ? member.memberCd.eq(Long.valueOf(memberId)) : null ;
-//        return hasText(memberId) ? member.memberPK.memberId.eq(memberId) : null ;
     }
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public MemberForResDto joinMember(final MemberForServiceDto memberForServiceDto) {
 
-        Member existMember = memberQueryRepository.checkMemberIdExist(memberForServiceDto.getMemberId()) ;
+        Member existMember = memberRepository.checkMemberIdExist(memberForServiceDto.getMemberId()) ;
 
 //      중복된 계정이 있다면 예외처리
         Optional.ofNullable(existMember)
@@ -79,7 +79,7 @@ public class MemberService {
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean chngMemberInfo(final ChngMemberInfoForSerDto chngMemberInfoForSerDto) {
 
-        Long result = memberQueryRepository.updateMember(chngMemberInfoForSerDto) ;
+        Long result = memberRepository.updateMember(chngMemberInfoForSerDto) ;
 
         if(result == 0 || result >= 2)
             throw new ErrorHandler(ErrorCode.MEMBER_ERROR_001) ;
@@ -88,25 +88,30 @@ public class MemberService {
 
     }
 
-    public HttpEntity doSignIn(MemberLoginForServiceDto memberLoginForServiceDto) {
+    public Map<String, Object> doSignIn(MemberLoginForServiceDto memberLoginForServiceDto) {
 
-        Member member = memberQueryRepository.login(memberLoginForServiceDto.getMemberId(), memberLoginForServiceDto.getPassword()) ;
+        Member member = memberRepository.login(memberLoginForServiceDto.getMemberId(), memberLoginForServiceDto.getPassword()) ;
+
+        Optional.ofNullable(member).orElseThrow(() -> new UsernameNotFoundException("미존재 회원")) ;
 
         HttpEntity httpEntity = HttpProtocol.builder()
                 .body(new HashMap<String, Object>() {{
                     put("memberGrade", member.getMemberGrade()) ;
-                    put("memberaGrant", member.getMemberGrant()) ;
+                    put("memberGrant", member.getMemberGrant()) ;
                     put("memberCd", String.valueOf(member.getMemberCd())) ;
-//                    put("memberCd", String.valueOf(member.getMemberPK().getMemberCd())) ;
                 }})
                 .headers(null)
                 .build() ;
 
-        ResponseVO responseVO = restTemplateUtil.httpCommunication("http://localhost:8080/v1.0.0/auth/token", POST, httpEntity) ;
-        log.info("responseVO : {}", responseVO) ;
+        ResponseEntity responseEntity = restTemplateUtil.httpCommunication("http://localhost:8080/v1.0.0/auth/token", POST, httpEntity) ;
+        log.info("responseVO : {}", responseEntity.getHeaders()) ;
 
         return null ;
 
+//        return new HashMap(){{
+//            put("accessToken", responseVO.getHeaders().get("accessToken")) ;
+//            put("refreshToken", responseVO.getHeaders().get("refreshToken")) ;
+//        }} ;
     }
 
 }

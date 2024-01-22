@@ -47,8 +47,8 @@ public class Member {
     @Column(length = 2, nullable = false)
     private String memberGrade ;
 
-    @Column(length = 1, nullable = false)
-    private String memberGrant ;
+    @Enumerated(EnumType.STRING)
+    private MemberGrantType memberGrant ;
 
     @Column(length = 12, nullable = false)
     private String phoneNumber ;
@@ -64,6 +64,7 @@ public class Member {
     @Column(nullable = false)
     private Timestamp regerDt ;
 
+
     @Builder
     public Member(MemberForServiceDto memberForServiceDto) {
 
@@ -73,7 +74,7 @@ public class Member {
         this.unregYn = CCConst.N ;
         this.rstYn = CCConst.N ;
         this.memberGrade = MemberGradeType.WELCOME_LEVEL.getCode() ;
-        this.memberGrant = MemberGrantType.U.getCode() ;
+        this.memberGrant = MemberGrantType.U ;
         this.phoneNumber = memberForServiceDto.getPhoneNumber();
         this.regerDt = new Timestamp(System.currentTimeMillis()) ;
 

@@ -19,7 +19,6 @@ public enum MemberGrantType {
     ,C("C", "회사 권한")
     ,S("S", "매장 권한")
     ,U("U", "회원 권한")
-
     ;
 
     private String code ;

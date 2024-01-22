@@ -11,7 +11,6 @@ import static com.bookMngr.common.constant.CCConst.*;
 @Getter
 @ToString
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 final public class ApiResponse <T> {
 
