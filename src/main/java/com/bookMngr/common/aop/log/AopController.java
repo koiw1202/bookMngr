@@ -35,9 +35,11 @@ public class AopController {
     public void mainController(ProceedingJoinPoint joinPoint) {
 
         try {
+
             logging.logTrace(joinPoint.getSignature().toShortString(), true);
             joinPoint.proceed() ;
             logging.logTrace(joinPoint.getSignature().toShortString(), false);
+
 
         } catch (Exception e1){
             logging.getTraceLogger().error(e1.getMessage());
