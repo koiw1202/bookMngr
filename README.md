@@ -6,8 +6,8 @@
 * SpringBoot MVC (2.7.8)
 * JPA
 * Querydsl
-* Spring AOP
-* Spring Security (예정)
+* Spring AOP (로깅)
+* Spring Security (필터, 사전 권한 관리 적용 완료)
 * Spring Batch (예정)
 * MySql
 * Redis(예정)
