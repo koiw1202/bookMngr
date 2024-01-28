@@ -1,7 +1,5 @@
 package com.bookMngr.common.aop.log;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,23 +30,19 @@ public class AopController {
     public void range() {}
 
     @Around("range()")
-    public void mainController(ProceedingJoinPoint joinPoint) {
+    public Object mainController(ProceedingJoinPoint joinPoint) throws Throwable {
 
         try {
-
             logging.logTrace(joinPoint.getSignature().toShortString(), true);
-            joinPoint.proceed() ;
+            Object ret = joinPoint.proceed() ;
             logging.logTrace(joinPoint.getSignature().toShortString(), false);
 
+            return ret ;
 
         } catch (Exception e1){
             logging.getTraceLogger().error(e1.getMessage());
-
-        } catch (Throwable e2) {
-            logging.getTraceLogger().error(e2.getMessage());
-
+            throw e1 ;
         }
-
 
     }
 }

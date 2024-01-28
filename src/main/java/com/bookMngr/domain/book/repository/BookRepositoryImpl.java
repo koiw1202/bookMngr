@@ -7,7 +7,6 @@ import com.bookMngr.domain.book.model.response.SelectBookResultDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -21,15 +20,13 @@ import static org.springframework.util.StringUtils.hasText;
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2023-11-27        koiw1       최초 생성
+ * 2024-01-28        koiw1       최초 생성
  */
-@Repository
-public class BookQueryRepository {
+public class BookRepositoryImpl implements BookRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory ;
 
-
-    public BookQueryRepository(JPAQueryFactory jpaQueryFactory) {
+    public BookRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
@@ -49,10 +46,11 @@ public class BookQueryRepository {
         return hasText(String.valueOf(bookId)) ? book.bookId.eq(bookId) : null ;
     }
 
+    @Override
     public List<SelectBookResultDto> selectBookInfo(BookInfoDto bookInfoDto) {
         return jpaQueryFactory
                 .select(Projections.bean(SelectBookResultDto.class,
-                         book.bookId
+                        book.bookId
                         ,book.writer
                         ,book.title
                         ,category.categoryId
@@ -67,21 +65,19 @@ public class BookQueryRepository {
                 .on(category.categoryId.eq(bookCategoryRelation.bookCategoryRelationPK.category.categoryId))
 
                 .where(bookStatusEq(BookStatusCd.BOOK_STATUS_OK)
-                  .and(titleNameEq(bookInfoDto.getTitle()))
-                  .and(writerName(bookInfoDto.getWriter()))
+                        .and(titleNameEq(bookInfoDto.getTitle()))
+                        .and(writerName(bookInfoDto.getWriter()))
                 )
-                .offset((bookInfoDto.getPageNo() -1) * bookInfoDto.getPageSize() )
+                .offset((bookInfoDto.getPageNo() -1) * bookInfoDto.getPageSize())
                 .limit(bookInfoDto.getPageSize())
                 .fetch() ;
     }
 
-
+    @Override
     public long updateBookStatus(UpdateBookStatusDto updateBookStatusDto) {
-
         return jpaQueryFactory.update(book)
                 .set(book.bookStatus, updateBookStatusDto.getBookStatusCd())
                 .where(bookIdEq(updateBookStatusDto.getBookId()))
                 .execute() ;
     }
-
 }

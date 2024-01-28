@@ -4,10 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * description    : HttpEntity의 값에 Builder를 적용한 클레스

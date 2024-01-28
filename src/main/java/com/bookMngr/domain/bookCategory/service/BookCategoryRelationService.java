@@ -3,14 +3,10 @@ package com.bookMngr.domain.bookCategory.service;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.domain.bookCategory.model.BookCategoryRelationDto;
 import com.bookMngr.domain.bookCategory.repository.BookCategoryQueryRepository;
-import com.bookMngr.domain.bookCategory.repository.BookCategoryRepository;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import static com.bookMngr.domain.bookCategory.domain.QBookCategoryRelation.bookCategoryRelation;
 
 /**
  * packageName    : com.bookMngr.relation.bookCategory.service

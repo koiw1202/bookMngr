@@ -3,7 +3,6 @@ package com.bookMngr.domain.member.service;
 import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.common.restTemplate.HttpProtocol;
-import com.bookMngr.common.restTemplate.ResponseVO;
 import com.bookMngr.common.restTemplate.RestTemplateUtil;
 import com.bookMngr.domain.member.domain.Member;
 import com.bookMngr.domain.member.model.ChngMemberInfoForSerDto;
@@ -12,7 +11,6 @@ import com.bookMngr.domain.member.model.res.MemberForResDto;
 import com.bookMngr.domain.member.model.res.MemberForServiceDto;
 import com.bookMngr.domain.member.repository.MemberRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -43,7 +41,6 @@ import static org.springframework.util.StringUtils.hasText;
 @Slf4j
 public class MemberService {
 
-    private final JPAQueryFactory jpaQueryFactory ;
     private final MemberRepository memberRepository ;
     private final RestTemplateUtil restTemplateUtil ;
 
@@ -107,11 +104,6 @@ public class MemberService {
         log.info("responseVO : {}", responseEntity.getHeaders()) ;
 
         return null ;
-
-//        return new HashMap(){{
-//            put("accessToken", responseVO.getHeaders().get("accessToken")) ;
-//            put("refreshToken", responseVO.getHeaders().get("refreshToken")) ;
-//        }} ;
     }
 
 }

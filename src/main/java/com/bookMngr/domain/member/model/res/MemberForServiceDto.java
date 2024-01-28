@@ -1,10 +1,8 @@
 package com.bookMngr.domain.member.model.res;
 
-import com.bookMngr.common.code.MemberGrantType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * packageName    : com.bookMngr.member.model

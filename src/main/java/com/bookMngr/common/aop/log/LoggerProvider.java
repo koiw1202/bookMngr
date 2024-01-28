@@ -2,8 +2,6 @@ package com.bookMngr.common.aop.log;
 
 import org.springframework.stereotype.Component;
 
-import java.security.ProtectionDomain;
-
 /**
  * description    :
  * ===========================================================

@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-
 import java.util.Map;
 
 import static com.bookMngr.common.constant.CCConst.MEMBER_JOIN_SUCCESS;

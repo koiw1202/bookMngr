@@ -6,7 +6,6 @@ import com.bookMngr.domain.member.domain.Member;
 import com.bookMngr.domain.member.model.ChngMemberInfoForSerDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.stereotype.Component;
 
 import static com.bookMngr.domain.member.domain.QMember.member;
 import static org.springframework.util.StringUtils.hasText;

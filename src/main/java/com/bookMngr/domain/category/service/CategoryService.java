@@ -4,7 +4,6 @@ import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.domain.category.domain.Category;
 import com.bookMngr.domain.category.model.CategoryDto;
-import com.bookMngr.domain.category.repository.CategoryQueryRepository;
 import com.bookMngr.domain.category.repository.CategoryRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Service;
@@ -18,17 +17,18 @@ public class CategoryService {
 
     private final JPAQueryFactory jpaQueryFactory ;
     private final CategoryRepository categoryRepo ;
-    private final CategoryQueryRepository categoryQueryRepository ;
+    private final CategoryRepository categoryRepository ;
 
-    public CategoryService(JPAQueryFactory jpaQueryFactory, CategoryRepository categoryRepo, CategoryQueryRepository categoryQueryRepository) {
+    public CategoryService(JPAQueryFactory jpaQueryFactory, CategoryRepository categoryRepo, CategoryRepository categoryRepository) {
         this.jpaQueryFactory = jpaQueryFactory;
         this.categoryRepo = categoryRepo;
-        this.categoryQueryRepository = categoryQueryRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean insertCategory(final CategoryDto categoryDto) {
-        CategoryDto categoryExist = categoryQueryRepository.selectSingleCategory(categoryDto) ;
+
+        CategoryDto categoryExist = categoryRepository.getSingleCategory(categoryDto) ;
 
             Optional.ofNullable(categoryExist)
                 .ifPresentOrElse(vo -> {
@@ -44,8 +44,6 @@ public class CategoryService {
                         throw new ErrorHandler(ErrorCode.BOOK_ERROR_002, e.getMessage()) ;
                     }
                 });
-
         return true ;
     }
-
 }

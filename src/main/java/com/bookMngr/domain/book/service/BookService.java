@@ -8,7 +8,6 @@ import com.bookMngr.domain.book.model.BookDto;
 import com.bookMngr.domain.book.model.BookInfoDto;
 import com.bookMngr.domain.book.model.UpdateBookStatusDto;
 import com.bookMngr.domain.book.model.response.SelectBookResultDto;
-import com.bookMngr.domain.book.repository.BookQueryRepository;
 import com.bookMngr.domain.book.repository.BookRepository;
 import com.bookMngr.domain.bookCategory.domain.BookCategoryRelation;
 import com.bookMngr.domain.bookCategory.domain.BookCategoryRelationPK;
@@ -30,7 +29,6 @@ public class BookService {
     private final JPAQueryFactory jpaQueryFactory ;
     private final BookRepository bookRepository;
     private final BookCategoryRepository bookCategoryRepo ;
-    private final BookQueryRepository bookQueryRepository;
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean insertBook(final BookDto bookDto) {
@@ -67,14 +65,14 @@ public class BookService {
 
     public List<SelectBookResultDto> getBookInfo(BookInfoDto bookInfoDto) {
 
-        return bookQueryRepository.selectBookInfo(bookInfoDto) ;
+        return bookRepository.selectBookInfo(bookInfoDto) ;
 
     }
 
     @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean setBookStatus(final UpdateBookStatusDto updateBookStatusDto) {
 
-        long result = bookQueryRepository.updateBookStatus(updateBookStatusDto);
+        long result = bookRepository.updateBookStatus(updateBookStatusDto);
 
         if(result == 1)
             return true ;
