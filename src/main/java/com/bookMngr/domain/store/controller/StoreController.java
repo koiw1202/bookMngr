@@ -1,7 +1,9 @@
 package com.bookMngr.domain.store.controller;
 
+import com.bookMngr.domain.store.model.StoreDto;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,9 +18,11 @@ public class StoreController {
 
     @Operation(summary = "매장등록" , description = "매장등록 API")
     @PostMapping("/bo/manager/store")
-    public String enrollStore() {
+    public String enrollStore(@RequestBody StoreDto storeDto) {
         System.out.println("매장등록 실행") ;
+
         return null ;
+
     }
 
 

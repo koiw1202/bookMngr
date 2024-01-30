@@ -20,7 +20,7 @@ import javax.persistence.*;
 public class Store {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long storeCd ;
+    private Long storeCd ;
 
     @Column(length = 255, nullable = false)
     private String storeNm ;
