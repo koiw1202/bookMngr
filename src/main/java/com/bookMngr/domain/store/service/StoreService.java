@@ -11,6 +11,6 @@ import com.bookMngr.domain.store.model.StoreDto;
  */
 public interface StoreService {
 
-    public long enrollStorel(final StoreDto storeDto) ;
+    public Integer enrollStore(final StoreDto storeDto) ;
 
 }

@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * -----------------------------------------------------------
  * 2024-01-30        koiw1       최초 생성
  */
-public interface StoreRepository extends JpaRepository<Store, Long> {
+public interface StoreRepository extends JpaRepository<Store, Long>, StoreRepsitoryCustom {
 
 }

@@ -29,7 +29,6 @@ public class CategoryController {
 
         if(categoryService.insertCategory(categoryDto))
             return ApiResponse.ok(CCConst.MERGE_SUCCESS, null) ;
-
         else
             throw new ErrorHandler(ErrorCode.CATEGORY_ERROR_001) ;
 

@@ -11,4 +11,6 @@ import com.bookMngr.domain.store.domain.Store;
  */
 public interface StoreRepsitoryCustom {
 
+    public Long updateStore(Store store) ;
+
 }

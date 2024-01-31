@@ -36,8 +36,8 @@ public class SecurityConfig {
         this.defaultSetHttpSecurity(http) ;
 
         return http.authorizeRequests()
-                .antMatchers("/**/**/bo/manager/**").hasAnyAuthority("ROLE_M", "ROLE_C")
-                .antMatchers("/**/**/bo/company/**").hasAuthority("ROLE_C")
+//                .antMatchers("/**/**/bo/manager/**").hasAnyAuthority("ROLE_M", "ROLE_C")
+//                .antMatchers("/**/**/bo/company/**").hasAuthority("ROLE_C")
                 .antMatchers("/*/**").permitAll()
                 .and()
                 .build() ;

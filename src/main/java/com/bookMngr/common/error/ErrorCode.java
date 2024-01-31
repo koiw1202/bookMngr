@@ -27,6 +27,8 @@ public enum ErrorCode {
     ,MEMBER_ERROR_001(400, "EC1000", "존재하지 않는 회원입니다.", "회원의 아이디가 존재하지 않습니다.")
     ,MEMBER_ERROR_002(400, "EC1011", "회원 정보 변경에 실패하였습니다.", "회원 정보 변경시 내부 문제 발생.")
 
+    ,STORE_ERROR_001(400, "EC1012", "매장 생성 실패", "매장 생성시 에러 발생")
+
     ;
 
     private Integer status ;

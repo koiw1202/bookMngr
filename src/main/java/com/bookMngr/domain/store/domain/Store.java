@@ -1,8 +1,6 @@
 package com.bookMngr.domain.store.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -17,6 +15,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @AllArgsConstructor
+@ToString
 public class Store {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
