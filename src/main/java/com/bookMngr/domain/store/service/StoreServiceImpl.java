@@ -1,16 +1,19 @@
 package com.bookMngr.domain.store.service;
 
-import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.domain.store.domain.Store;
-import com.bookMngr.domain.store.model.StoreDto;
 import com.bookMngr.domain.store.repository.StoreRepository;
+import com.bookMngr.domain.store.service.dto.InsertStoreDto;
+import com.bookMngr.domain.store.service.dto.UpdateStoreDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+
+import static com.bookMngr.common.constant.CCConst.FAIL_CODE_FOR_CUD;
+import static com.bookMngr.common.constant.CCConst.OK_CODE_FOR_CUD;
 
 /**
  * description    :
@@ -32,17 +35,34 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {ErrorHandler.class, Exception.class})
-    public Integer enrollStore(final StoreDto storeDto) {
+    public Integer enrollStore(final InsertStoreDto insertStoreDto) {
 
         Store result = storeRepository.save(Store.builder()
-                .storeNm(storeDto.getStoreNm())
-                .address(storeDto.getAddress())
-                .latitude(storeDto.getLatitude())
-                .longitude(storeDto.getLongitude())
+                .storeNm(insertStoreDto.getStoreNm())
+                .address(insertStoreDto.getAddress())
+                .latitude(insertStoreDto.getLatitude())
+                .longitude(insertStoreDto.getLongitude())
                 .build()) ;
 
         return Optional.ofNullable(result)
-                .map(r -> 1)
-                .orElseThrow(() -> new ErrorHandler(ErrorCode.STORE_ERROR_001)) ;
+                .map(r -> OK_CODE_FOR_CUD)
+                .orElse(FAIL_CODE_FOR_CUD) ;
+    }
+
+    @Override
+    public Integer updateStoreInfo(final UpdateStoreDto updateStoreDto) {
+
+        Store updateStoreResult = storeRepository.save(Store.builder()
+                .storeCd(updateStoreDto.getStoreCd())
+                .address(updateStoreDto.getAddress())
+                .storeNm(updateStoreDto.getStoreNm())
+                .latitude(updateStoreDto.getLatitude())
+                .longitude(updateStoreDto.getLongitude())
+                .build()
+        ) ;
+
+        return Optional.ofNullable(updateStoreResult)
+                .map(v -> OK_CODE_FOR_CUD)
+                .orElse(FAIL_CODE_FOR_CUD) ;
     }
 }

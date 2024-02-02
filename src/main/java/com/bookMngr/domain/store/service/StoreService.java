@@ -1,6 +1,7 @@
 package com.bookMngr.domain.store.service;
 
-import com.bookMngr.domain.store.model.StoreDto;
+import com.bookMngr.domain.store.service.dto.InsertStoreDto;
+import com.bookMngr.domain.store.service.dto.UpdateStoreDto;
 
 /**
  * description    :
@@ -11,6 +12,8 @@ import com.bookMngr.domain.store.model.StoreDto;
  */
 public interface StoreService {
 
-    public Integer enrollStore(final StoreDto storeDto) ;
+    public Integer enrollStore(final InsertStoreDto insertStoreDto) ;
+
+    public Integer updateStoreInfo(final UpdateStoreDto updateStoreDto) ;
 
 }

@@ -3,6 +3,7 @@ package com.bookMngr.domain.store.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * description    :
@@ -14,8 +15,9 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Getter
-@AllArgsConstructor
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Store {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +29,11 @@ public class Store {
     @Column(length = 255, nullable = false)
     private String address ;
 
-    private long latitude ;
+    @Column(precision=12, scale=9)
+    private BigDecimal latitude ;
 
-    private long longitude ;
+    @Column(precision=12, scale=9)
+    private BigDecimal longitude ;
 
-    public Store() {
-
-    }
 
 }

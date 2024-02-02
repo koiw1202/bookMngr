@@ -16,10 +16,12 @@ public class CCConst {
 
     final public static String Y = "Y" ;
     final public static String N = "N" ;
-    public final static int OK_STATUS = 200 ;
-    public final static int FAIL_STATUS = 500 ;
+    public final static Integer OK_STATUS = 200 ;
+    public final static Integer FAIL_STATUS = 500 ;
     public final static String OK_CODE = "S0000" ;
     public final static String FAIL_CODE = "F0000" ;
+    public final static Integer OK_CODE_FOR_CUD = 1 ;
+    public final static Integer FAIL_CODE_FOR_CUD = 0 ;
 
     final public static String MERGE_SUCCESS = "성공적으로 등록되었습니다." ;
     final public static String MERGE_FAIL = "내부 문제가 발생하였습니다." ;

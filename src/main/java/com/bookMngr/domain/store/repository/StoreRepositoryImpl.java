@@ -5,7 +5,6 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.bookMngr.domain.member.domain.QMember.member;
 import static com.bookMngr.domain.store.domain.QStore.store;
 import static org.springframework.util.StringUtils.hasText;
 
