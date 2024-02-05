@@ -6,6 +6,9 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 
+import static com.bookMngr.common.constant.CCConst.PAGENO_NOTBLANK_MESSAGE;
+import static com.bookMngr.common.constant.CCConst.PAGESIZE_NOTBLANK_MESSAGE;
+
 /**
  * packageName    : com.bookMngr.book.model
  * fileName       : SelectBookDto
@@ -22,11 +25,11 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class BookInfoDto {
 
-    @NotBlank
+    @NotBlank(message = PAGENO_NOTBLANK_MESSAGE)
     @Schema(name = "pageNo", description = "1", example = "현재 페이지", required = true)
     private Integer pageNo ;
 
-    @NotBlank
+    @NotBlank(message = PAGESIZE_NOTBLANK_MESSAGE)
     @Schema(name = "pageSize", description = "10", example = "페이지 사이즈", required = true)
     private Integer pageSize ;
 

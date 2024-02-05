@@ -2,15 +2,19 @@ package com.bookMngr.domain.store.service;
 
 import com.bookMngr.common.error.ErrorHandler;
 import com.bookMngr.domain.store.domain.Store;
+import com.bookMngr.domain.store.model.StoreInfoDto;
 import com.bookMngr.domain.store.repository.StoreRepository;
 import com.bookMngr.domain.store.service.dto.InsertStoreDto;
+import com.bookMngr.domain.store.service.dto.SelectStoreDto;
 import com.bookMngr.domain.store.service.dto.UpdateStoreDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.bookMngr.common.constant.CCConst.FAIL_CODE_FOR_CUD;
 import static com.bookMngr.common.constant.CCConst.OK_CODE_FOR_CUD;
@@ -64,5 +68,15 @@ public class StoreServiceImpl implements StoreService {
         return Optional.ofNullable(updateStoreResult)
                 .map(v -> OK_CODE_FOR_CUD)
                 .orElse(FAIL_CODE_FOR_CUD) ;
+    }
+
+    @Override
+    public List<SelectStoreDto> getStoreList(final StoreInfoDto storeInfoDto) {
+
+        List<Store> storeList = storeRepository.selectStore(storeInfoDto) ;
+
+        return storeList.stream().map(v -> new SelectStoreDto(v))
+                .collect(Collectors.toList()) ;
+
     }
 }

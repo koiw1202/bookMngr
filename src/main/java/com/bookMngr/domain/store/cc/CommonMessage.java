@@ -15,4 +15,6 @@ public class CommonMessage {
     public static final String STORE_MSG_004 = "매장경도는 필수입력 값입니다." ;
 
 
+
+
 }

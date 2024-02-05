@@ -1,7 +1,11 @@
 package com.bookMngr.domain.store.service;
 
+import com.bookMngr.domain.store.model.StoreInfoDto;
 import com.bookMngr.domain.store.service.dto.InsertStoreDto;
+import com.bookMngr.domain.store.service.dto.SelectStoreDto;
 import com.bookMngr.domain.store.service.dto.UpdateStoreDto;
+
+import java.util.List;
 
 /**
  * description    :
@@ -12,8 +16,8 @@ import com.bookMngr.domain.store.service.dto.UpdateStoreDto;
  */
 public interface StoreService {
 
-    public Integer enrollStore(final InsertStoreDto insertStoreDto) ;
-
-    public Integer updateStoreInfo(final UpdateStoreDto updateStoreDto) ;
+    Integer enrollStore(final InsertStoreDto insertStoreDto) ;
+    Integer updateStoreInfo(final UpdateStoreDto updateStoreDto) ;
+    List<SelectStoreDto> getStoreList(final StoreInfoDto storeInfoDto) ;
 
 }

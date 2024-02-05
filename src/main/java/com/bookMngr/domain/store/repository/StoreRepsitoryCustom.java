@@ -1,6 +1,9 @@
 package com.bookMngr.domain.store.repository;
 
 import com.bookMngr.domain.store.domain.Store;
+import com.bookMngr.domain.store.model.StoreInfoDto;
+
+import java.util.List;
 
 /**
  * description    :
@@ -11,6 +14,7 @@ import com.bookMngr.domain.store.domain.Store;
  */
 public interface StoreRepsitoryCustom {
 
-    public Long updateStore(Store store) ;
+    Long updateStore(final Store store) ;
+    List<Store> selectStore(final StoreInfoDto storeInfoDto) ;
 
 }

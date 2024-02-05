@@ -1,10 +1,16 @@
 package com.bookMngr.domain.store.repository;
 
+import com.bookMngr.domain.member.domain.Member;
 import com.bookMngr.domain.store.domain.Store;
+import com.bookMngr.domain.store.model.StoreInfoDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
+import static com.bookMngr.common.util.UtilFunction.calOffset;
+import static com.bookMngr.domain.member.domain.QMember.member;
 import static com.bookMngr.domain.store.domain.QStore.store;
 import static org.springframework.util.StringUtils.hasText;
 
@@ -24,18 +30,39 @@ public class StoreRepositoryImpl implements StoreRepsitoryCustom {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    private BooleanExpression storeCdEq(final Long storeCd) {
-        return hasText(String.valueOf(storeCd)) ? store.storeCd.eq(storeCd) : null ;
+    private BooleanExpression eqStoreCd(final Long storeCd) {
+
+        return storeCd != null ? store.storeCd.eq(storeCd) : null ;
+    }
+
+    private BooleanExpression likeStoreNm(final String storeNm) {
+        return hasText(storeNm) ? store.storeNm.like(String.join("", "%", storeNm, "%")) : null ;
+    }
+
+    private BooleanExpression likeStoreAddress(final String storeAddress) {
+        return hasText(storeAddress) ? store.address.like(String.join("", "%", storeAddress , "%")) : null ;
     }
 
     @Override
-    public Long updateStore(Store store2) {
+    public Long updateStore(Store storeToUpdate) {
 
-        jpaQueryFactory.update(store)
-                .set(store.storeNm, store2.getStoreNm())
-                .where(storeCdEq(store2.getStoreCd()))
+        return jpaQueryFactory.update(store)
+                .set(store.storeNm, storeToUpdate.getStoreNm())
+                .where(eqStoreCd(storeToUpdate.getStoreCd()))
                 .execute() ;
+    }
 
-        return null;
+    @Override
+    public List<Store> selectStore(StoreInfoDto storeInfoDto) {
+
+        return jpaQueryFactory.selectFrom(store)
+                .where( eqStoreCd(storeInfoDto.getStoreCd())
+                       ,likeStoreNm(storeInfoDto.getStoreNm())
+                       ,likeStoreAddress(storeInfoDto.getStoreAddress())
+                )
+                .offset((calOffset(storeInfoDto.getPageNo(), storeInfoDto.getPageSize())))
+                .limit(storeInfoDto.getPageSize())
+                .fetch() ;
+
     }
 }

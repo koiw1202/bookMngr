@@ -26,10 +26,14 @@ public class CCConst {
     final public static String MERGE_SUCCESS = "성공적으로 등록되었습니다." ;
     final public static String MERGE_FAIL = "내부 문제가 발생하였습니다." ;
     final public static String SELECT_SUCCESS = "성공적으로 조회되었습니다." ;
+    final public static String SELECT_FAIL = "조회할 데이터가 존재하지 않습니다." ;
     final public static String NO_DATA = "데이터가 존재하지 않습니다." ;
     final public static String UPDATE_SUCCESS = "성공적으로 변경되었습니다." ;
     final public static String MEMBER_JOIN_SUCCESS = "성공적으로 가입되었습니다." ;
     final public static String ISSUE_TOKEN_SUCCESS = "성공적으로 발급되었습니다." ;
     final public static String ARGUMENT_NOT_VALID = "데이터 형식이 잘못되었습니다." ;
+    final public static String PAGENO_NOTBLANK_MESSAGE = "현재 페이지는 필수 입력값 입니다." ;
+    final public static String PAGESIZE_NOTBLANK_MESSAGE = "페이지 크기는 필수 입력값 입니다." ;
+
 
 }
