@@ -12,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface StoreRepository extends JpaRepository<Store, Long>, StoreRepsitoryCustom {
 
+    Integer deleteStoreByStoreCd(Long storeCd) ;
+
 }

@@ -114,7 +114,17 @@ public class StoreController {
                 .orElseThrow(() -> new ErrorHandler(STORE_ERROR_002, MERGE_FAIL)) ;
     }
 
+    @Operation(summary = "매장 삭제" , description = "매장삭제 API")
+    @DeleteMapping("/bo/manager/store/{storeCd}")
+    public HttpEntity DeleteStoreInfo(@PathVariable Long storeCd ) throws ErrorHandler {
 
+        Integer deleteResult = storeService.deleteStore(storeCd) ;
+
+        return Optional.ofNullable(deleteResult)
+                .filter((d) -> d == OK_CODE_FOR_CUD)
+                .map((d) -> ApiResponse.ok(CCConst.DELETE_SUCCESS, null))
+                .orElseThrow(() -> new ErrorHandler(STORE_ERROR_004)) ;
+    }
 }
 
 

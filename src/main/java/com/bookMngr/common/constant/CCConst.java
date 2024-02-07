@@ -35,5 +35,8 @@ public class CCConst {
     final public static String PAGENO_NOTBLANK_MESSAGE = "현재 페이지는 필수 입력값 입니다." ;
     final public static String PAGESIZE_NOTBLANK_MESSAGE = "페이지 크기는 필수 입력값 입니다." ;
 
+    final public static String DELETE_SUCCESS = "성공적으로 삭제되었습니다." ;
+    final public static String DELETE_FAIL = "삭제하는데 실패하였습니다." ;
+
 
 }

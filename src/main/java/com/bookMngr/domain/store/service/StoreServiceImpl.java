@@ -28,7 +28,7 @@ import static com.bookMngr.common.constant.CCConst.OK_CODE_FOR_CUD;
  */
 @Slf4j
 @Service
-
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = {ErrorHandler.class, Exception.class})
 public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository ;
@@ -38,7 +38,6 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {ErrorHandler.class, Exception.class})
     public Integer enrollStore(final InsertStoreDto insertStoreDto) {
 
         Store result = storeRepository.save(Store.builder()
@@ -71,12 +70,45 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SelectStoreDto> getStoreList(final StoreInfoDto storeInfoDto) {
 
         List<Store> storeList = storeRepository.selectStore(storeInfoDto) ;
 
         return storeList.stream().map(v -> new SelectStoreDto(v))
                 .collect(Collectors.toList()) ;
+    }
+
+    @Override
+    public Integer deleteStore(Long storeCd) {
+
+        return storeRepository.deleteStoreByStoreCd(storeCd) ;
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

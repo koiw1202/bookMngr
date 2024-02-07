@@ -19,5 +19,6 @@ public interface StoreService {
     Integer enrollStore(final InsertStoreDto insertStoreDto) ;
     Integer updateStoreInfo(final UpdateStoreDto updateStoreDto) ;
     List<SelectStoreDto> getStoreList(final StoreInfoDto storeInfoDto) ;
+    Integer deleteStore(final Long storeId) ;
 
 }
