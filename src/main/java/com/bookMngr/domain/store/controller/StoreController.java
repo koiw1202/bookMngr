@@ -50,8 +50,8 @@ public class StoreController {
             ,@Parameter(name = "storeAddress" , description = "매장주소" , example = "서울시")
             ,@Parameter(name = "latitude" , description = "매장위도" , example = "1")
             ,@Parameter(name = "longitude" , description = "매장경도" , example = "1")
-            ,@Parameter(name = "pageNo" , description = "매장코드" , example = "1", required = true)
-            ,@Parameter(name = "pageSize" , description = "매장코드" , example = "10", required = true)
+            ,@Parameter(name = "pageNo" , description = "현재 페이지" , example = "1", required = true)
+            ,@Parameter(name = "pageSize" , description = "페이지 크기" , example = "10", required = true)
 
     })
     public HttpEntity getStoreList(@RequestParam(required = false) final Long storeCd,
@@ -116,7 +116,7 @@ public class StoreController {
 
     @Operation(summary = "매장 삭제" , description = "매장삭제 API")
     @DeleteMapping("/bo/manager/store/{storeCd}")
-    public HttpEntity DeleteStoreInfo(@PathVariable Long storeCd ) throws ErrorHandler {
+    public HttpEntity DeleteStoreInfo(@PathVariable Long storeCd) throws ErrorHandler {
 
         Integer deleteResult = storeService.deleteStore(storeCd) ;
 
