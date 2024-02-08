@@ -59,8 +59,8 @@ public class StoreController {
                                    @RequestParam(required = false) final String storeAddress,
                                    @RequestParam(required = false) final BigDecimal latitude,
                                    @RequestParam(required = false) final BigDecimal longitude,
-                                   @RequestParam(required = true) final Integer pageNo,
-                                   @RequestParam(required = true) final Integer pageSize) throws ErrorHandler {
+                                   @RequestParam final Integer pageNo,
+                                   @RequestParam final Integer pageSize) throws ErrorHandler {
 
         List<SelectStoreDto> storeList  =
                 storeService.getStoreList(StoreInfoDto.builder()
