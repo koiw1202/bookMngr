@@ -2,9 +2,11 @@ package com.bookMngr.domain.book.domain;
 
 
 import com.bookMngr.domain.bookCategory.domain.BookCategoryRelation;
+import com.bookMngr.domain.store.domain.Store;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Book {
 
     @Id @GeneratedValue
@@ -31,12 +34,11 @@ public class Book {
     @OneToMany(mappedBy = "bookCategoryRelationPK.book", fetch = FetchType.LAZY)
     private List<BookCategoryRelation> bookCategoryRelation ;
 
+
+
     public Book(long bookId) {
 
         this.bookId = bookId ;
-    }
-
-    public Book() {
 
     }
 }
