@@ -1,6 +1,5 @@
 package com.bookMngr.domain.store.repository;
 
-import com.bookMngr.domain.member.domain.Member;
 import com.bookMngr.domain.store.domain.Store;
 import com.bookMngr.domain.store.model.StoreInfoDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -10,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 import static com.bookMngr.common.util.UtilFunction.calOffset;
-import static com.bookMngr.domain.member.domain.QMember.member;
 import static com.bookMngr.domain.store.domain.QStore.store;
 import static org.springframework.util.StringUtils.hasText;
 
@@ -30,16 +28,15 @@ public class StoreRepositoryImpl implements StoreRepsitoryCustom {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    private BooleanExpression eqStoreCd(final Long storeCd) {
-
+    public static BooleanExpression eqStoreCd(final Long storeCd) {
         return storeCd != null ? store.storeCd.eq(storeCd) : null ;
     }
 
-    private BooleanExpression likeStoreNm(final String storeNm) {
+    public static BooleanExpression likeStoreNm(final String storeNm) {
         return hasText(storeNm) ? store.storeNm.like(String.join("", "%", storeNm, "%")) : null ;
     }
 
-    private BooleanExpression likeStoreAddress(final String storeAddress) {
+    public static BooleanExpression likeStoreAddress(final String storeAddress) {
         return hasText(storeAddress) ? store.address.like(String.join("", "%", storeAddress , "%")) : null ;
     }
 

@@ -30,19 +30,19 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
-    public BooleanExpression bookStatusEq(BookStatusCd bookStatusCd) {
+    public static BooleanExpression bookStatusEq(BookStatusCd bookStatusCd) {
         return hasText(bookStatusCd.getCode()) ? book.bookStatus.eq(bookStatusCd.getCode()) : null ;
     }
 
-    public BooleanExpression titleNameEq(String titleName) {
+    public static BooleanExpression titleNameEq(String titleName) {
         return hasText(titleName) ? (book.title.eq(titleName)) : null ;
     }
 
-    public BooleanExpression writerName(String writer) {
+    public static BooleanExpression writerName(String writer) {
         return hasText(writer) ? book.writer.eq(writer) : null ;
     }
 
-    public BooleanExpression bookIdEq(Long bookId){
+    public static BooleanExpression bookIdEq(Long bookId){
         return hasText(String.valueOf(bookId)) ? book.bookId.eq(bookId) : null ;
     }
 

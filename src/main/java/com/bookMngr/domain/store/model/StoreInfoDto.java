@@ -1,17 +1,10 @@
 package com.bookMngr.domain.store.model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
-
-import static com.bookMngr.common.constant.CCConst.PAGENO_NOTBLANK_MESSAGE;
-import static com.bookMngr.domain.store.cc.CommonMessage.STORE_MSG_001;
 
 /**
  * description    :

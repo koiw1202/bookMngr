@@ -39,6 +39,7 @@ import static org.springframework.util.StringUtils.hasText;
 @Service
 @AllArgsConstructor
 @Slf4j
+@Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
 public class MemberService {
 
     private final MemberRepository memberRepository ;
@@ -48,7 +49,7 @@ public class MemberService {
         return hasText(memberId) ? member.memberCd.eq(Long.valueOf(memberId)) : null ;
     }
 
-    @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
+
     public MemberForResDto joinMember(final MemberForServiceDto memberForServiceDto) {
 
         Member existMember = memberRepository.checkMemberIdExist(memberForServiceDto.getMemberId()) ;
@@ -73,7 +74,6 @@ public class MemberService {
 
     } //End of joinMember
 
-    @Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
     public boolean chngMemberInfo(final ChngMemberInfoForSerDto chngMemberInfoForSerDto) {
 
         Long result = memberRepository.updateMember(chngMemberInfoForSerDto) ;

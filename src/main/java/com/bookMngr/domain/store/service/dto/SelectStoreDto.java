@@ -1,7 +1,6 @@
 package com.bookMngr.domain.store.service.dto;
 
 import com.bookMngr.domain.store.domain.Store;
-import com.bookMngr.domain.store.model.StoreInfoDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

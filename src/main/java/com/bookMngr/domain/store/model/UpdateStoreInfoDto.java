@@ -3,8 +3,9 @@ package com.bookMngr.domain.store.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import java.math.BigDecimal;
+
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 import static com.bookMngr.domain.store.cc.CommonMessage.STORE_MSG_001;
 

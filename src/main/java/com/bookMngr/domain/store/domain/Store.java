@@ -1,11 +1,10 @@
 package com.bookMngr.domain.store.domain;
 
-import com.bookMngr.domain.book.domain.Book;
+import com.bookMngr.domain.bookStore.domain.BookStore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +37,7 @@ public class Store {
     @Column(precision=12, scale=9)
     private BigDecimal longitude ;
 
-
+    @OneToMany(mappedBy = "bookStorePk.store", fetch = FetchType.LAZY)
+    private List<BookStore> bookStores ;
 
 }

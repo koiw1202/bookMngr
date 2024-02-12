@@ -1,6 +1,9 @@
 package com.bookMngr.domain.bookStore.domain;
 
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -13,11 +16,19 @@ import javax.persistence.Entity;
  * 2024-02-11        koiw1       최초 생성
  */
 @Entity
+@Getter
+@ToString
+@Builder
+@AllArgsConstructor
 public class BookStore {
 
     @EmbeddedId
-    private BookStorePk bookStore ;
+    private BookStorePk bookStorePk ;
 
     private Long quantity ;
 
+
+    public BookStore() {
+
+    }
 }
