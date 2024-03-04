@@ -13,7 +13,7 @@ public class CommonMessage {
     public static final String STORE_MSG_002 = "매장주소는 필수입력 값입니다." ;
     public static final String STORE_MSG_003 = "매장위도는 필수입력 값입니다." ;
     public static final String STORE_MSG_004 = "매장경도는 필수입력 값입니다." ;
-
+    public static final String STORE_MSG_005 = "매장정보는 필수입력 값입니다." ;
 
 
 

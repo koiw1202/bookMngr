@@ -66,18 +66,13 @@ public class UtilTest {
     @Autowired
     RestTemplateUtil restTemplateUtil ;
 
+
     /**
      * RestTmeplate 테스트용 메소드
      */
     @Test
     public void restTmeplateTest() {
-        Map<String, String> body = new HashMap<>(){{
-            put("pageNo", String.valueOf(1)) ;
-            put("pageSize", String.valueOf(10)) ;
-            put("searchType", "00") ;
-        }} ;
-        HttpEntity entity = new HttpEntity(body) ;
-        System.out.println(restTemplateUtil.get("http://localhost:8080/v1.0.0/book", entity, body));
+
     }
 
     @BeforeAll

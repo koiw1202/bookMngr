@@ -37,6 +37,11 @@ public class RestTemplateUtil {
         return this.httpCommunication(String.join("", uri, "?", queryString), HttpMethod.GET, entity);
     }
 
+    public ResponseEntity post(String uri, HttpEntity entity) {
+
+        return this.httpCommunication(uri, HttpMethod.POST, entity) ;
+    }
+
     public ResponseEntity httpCommunication(String uri, HttpMethod httpMethod, HttpEntity entity) {
         return restTemplate.exchange(uri, httpMethod, entity, ResponseVO.class) ;
     }
