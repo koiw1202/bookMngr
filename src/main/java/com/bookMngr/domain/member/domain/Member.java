@@ -64,6 +64,8 @@ public class Member {
     @Column(nullable = false)
     private Timestamp regerDt ;
 
+    @Column(nullable = false)
+    private Integer loginCnt ;
 
     @Builder
     public Member(MemberForServiceDto memberForServiceDto) {

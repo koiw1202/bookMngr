@@ -37,6 +37,8 @@ public class Store {
     @Column(precision=12, scale=9)
     private BigDecimal longitude ;
 
+
+
     @OneToMany(mappedBy = "bookStorePk.store", fetch = FetchType.LAZY)
     private List<BookStore> bookStores ;
 
