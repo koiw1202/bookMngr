@@ -23,6 +23,8 @@ public class CCConst {
     public final static Integer OK_CODE_FOR_CUD = 1 ;
     public final static Integer FAIL_CODE_FOR_CUD = 0 ;
 
+    public final static String ARROW_TO_RIGHT_FOR_LOG = "---->" ;
+
     final public static String MERGE_SUCCESS = "성공적으로 등록되었습니다." ;
     final public static String MERGE_FAIL = "내부 문제가 발생하였습니다." ;
     final public static String SELECT_SUCCESS = "성공적으로 조회되었습니다." ;
