@@ -32,7 +32,7 @@ public class RestTemplateUtil {
         Set<Map.Entry<String, String>> set = queryStringMap.entrySet() ;
         String queryString = set.stream()
             .map(vo -> String.join("", vo.getKey(), "=", vo.getValue(), "&"))
-            .collect(Collectors.joining()) ;
+            .collect(Collectors.joining());
 
         return this.httpCommunication(String.join("", uri, "?", queryString), HttpMethod.GET, entity);
     }
