@@ -51,7 +51,6 @@ public class AuthTest {
         System.out.println("beforeAll invoke");
     }
 
-    @Test
     public String refreshTokenTest() throws Exception {
 
         String content = new ObjectMapper().writeValueAsString(new HashMap<String, String>(){{
