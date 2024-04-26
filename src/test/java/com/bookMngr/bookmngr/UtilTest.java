@@ -7,16 +7,11 @@ import com.bookMngr.common.code.PAYLOAD_TYPE;
 import com.bookMngr.common.jwt.vo.PayloadVo;
 import com.bookMngr.common.restTemplate.RestTemplateUtil;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.bookMngr.common.code.PAYLOAD_TYPE.USER_CD;
 
