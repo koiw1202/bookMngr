@@ -4,7 +4,10 @@ import java.util.concurrent.Executors;
 
 public class TestMain {
 
-    static ExecutorService es = Executors.newFixedThreadPool(10) ;
+    static ExecutorService es1 = Executors.newFixedThreadPool(10) ;
+    static ExecutorService es2 = Executors.newCachedThreadPool() ;
+    static ExecutorService es3 = Executors.newScheduledThreadPool(10) ;
+
 
     public static void main(String args[]) {
         ThreadLocal<String> threadLocal = new ThreadLocal() ;
@@ -13,19 +16,12 @@ public class TestMain {
         threadLocal.set("threadLocal TEST") ;
         inheritableThreadLocal.set("inheritableThreadLocal TEST") ;
 
-        System.out.println("@@@@@@@@@@@@@@@@@") ;
-
-        System.out.println(threadLocal.get());
-        System.out.println(inheritableThreadLocal.get());
-
         CompletableFuture.runAsync(() -> {
 
             System.out.println(threadLocal.get());
             System.out.println(inheritableThreadLocal.get());
 
-        }, es).join();
-
-        System.out.println("@@@@@@@@@@@@@@@@@") ;
+        }, es1).join() ;
 
     }
 }
