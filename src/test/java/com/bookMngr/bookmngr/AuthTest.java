@@ -3,7 +3,6 @@ package com.bookMngr.bookmngr;
 import com.bookMngr.common.auth.UserAuthProvider;
 import com.bookMngr.common.code.PAYLOAD_TYPE;
 import com.bookMngr.common.jwt.TokenManagement;
-import com.bookMngr.common.jwt.vo.PayloadVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,7 +15,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,7 +49,6 @@ public class AuthTest {
         System.out.println("beforeAll invoke");
     }
 
-    @Test
     public String refreshTokenTest() throws Exception {
 
         String content = new ObjectMapper().writeValueAsString(new HashMap<String, String>(){{

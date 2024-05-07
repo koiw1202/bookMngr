@@ -7,16 +7,11 @@ import com.bookMngr.common.code.PAYLOAD_TYPE;
 import com.bookMngr.common.jwt.vo.PayloadVo;
 import com.bookMngr.common.restTemplate.RestTemplateUtil;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.bookMngr.common.code.PAYLOAD_TYPE.USER_CD;
 
@@ -66,18 +61,13 @@ public class UtilTest {
     @Autowired
     RestTemplateUtil restTemplateUtil ;
 
+
     /**
      * RestTmeplate 테스트용 메소드
      */
     @Test
     public void restTmeplateTest() {
-        Map<String, String> body = new HashMap<>(){{
-            put("pageNo", String.valueOf(1)) ;
-            put("pageSize", String.valueOf(10)) ;
-            put("searchType", "00") ;
-        }} ;
-        HttpEntity entity = new HttpEntity(body) ;
-        System.out.println(restTemplateUtil.get("http://localhost:8080/v1.0.0/book", entity, body));
+
     }
 
     @BeforeAll

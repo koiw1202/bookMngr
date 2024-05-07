@@ -63,7 +63,7 @@ public class BookService {
         return true ;
     }
 
-    public List<SelectBookResultDto> getBookInfo(BookInfoDto bookInfoDto) {
+    public List<SelectBookResultDto> getBookInfo(final BookInfoDto bookInfoDto) {
 
         return bookRepository.selectBookInfo(bookInfoDto) ;
 

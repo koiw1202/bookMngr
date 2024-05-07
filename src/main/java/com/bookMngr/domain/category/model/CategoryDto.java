@@ -20,4 +20,6 @@ public class CategoryDto {
     @Schema(name = "categoryNm" , description = "카테고리명" , example = "문학" , required = true)
     private String categoryNm ;
 
+    
+
 }

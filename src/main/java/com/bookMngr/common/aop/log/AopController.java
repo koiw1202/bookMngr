@@ -31,6 +31,7 @@ public class AopController {
 
     @Around("range()")
     public Object mainController(ProceedingJoinPoint joinPoint) throws Throwable {
+
         try {
             logging.logTrace(joinPoint.getSignature().toShortString(), true);
             Object ret = joinPoint.proceed() ;

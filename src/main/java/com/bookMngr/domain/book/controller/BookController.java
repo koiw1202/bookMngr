@@ -41,12 +41,12 @@ public class BookController {
 
     @Operation(summary = "책 조회" , description = "책 조회 API")
     @GetMapping(value = "/v1.0.0/book")
-    public HttpEntity selectBook(@RequestParam(required = true) Integer pageNo,
-                                  @RequestParam(required = true) Integer pageSize,
-                                  @RequestParam(required = true) String searchType ,
-                                  @RequestParam(required = false) String writer ,
-                                  @RequestParam(required = false) String title ,
-                                  @RequestParam(required = false) Long categoryId) throws ErrorHandler {
+    public HttpEntity selectBook(@RequestParam(required = true) final Integer pageNo,
+                                  @RequestParam(required = true) final Integer pageSize,
+                                  @RequestParam(required = true) final String searchType ,
+                                  @RequestParam(required = false) final String writer ,
+                                  @RequestParam(required = false) final String title ,
+                                  @RequestParam(required = false) final Long categoryId) throws ErrorHandler {
 
         switch (BookSearchType.convertCodeToType(searchType)) {
             case TITLE_NAME -> {
@@ -81,7 +81,7 @@ public class BookController {
 
     @Operation(summary = "책 상태 변경" , description = "책 상태 변경 API")
     @PutMapping(value = "/v1.0.0/book")
-    public HttpEntity updateBookStatus(@Valid @RequestBody UpdateBookStatusDto updateBookStatusDto) throws ErrorHandler {
+    public HttpEntity updateBookStatus(@Valid @RequestBody final UpdateBookStatusDto updateBookStatusDto) throws ErrorHandler {
 
         if(this.bookService.setBookStatus(updateBookStatusDto))
             return ApiResponse.ok(CCConst.UPDATE_SUCCESS, null) ;
