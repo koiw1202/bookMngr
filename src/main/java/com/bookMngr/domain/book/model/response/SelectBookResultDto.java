@@ -15,16 +15,16 @@ import lombok.*;
  */
 
 @Getter
-@Setter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class SelectBookResultDto {
 
+    private String bookId ;
     private String writer ;
     private String title ;
+    private String categoryId ;
     private String categoryNm ;
-
 
 }

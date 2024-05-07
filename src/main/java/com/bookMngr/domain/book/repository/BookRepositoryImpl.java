@@ -50,7 +50,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
     public List<SelectBookResultDto> selectBookInfo(BookInfoDto bookInfoDto) {
         return jpaQueryFactory
                 .select(Projections.bean(SelectBookResultDto.class,
-                        book.bookId
+                         book.bookId
                         ,book.writer
                         ,book.title
                         ,category.categoryId
