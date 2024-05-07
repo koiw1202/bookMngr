@@ -1,15 +1,10 @@
 package com.bookMngr.common.aop.log;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
-
-import static com.bookMngr.common.constant.CCConst.ARROW_TO_RIGHT_FOR_LOG;
 
 /**
  * description    :
@@ -20,11 +15,9 @@ import static com.bookMngr.common.constant.CCConst.ARROW_TO_RIGHT_FOR_LOG;
  */
 @Component
 @Aspect
-@Slf4j
 public class AopController {
 
     private final Logging logging ;
-
 
     public AopController(Logging logging) {
         this.logging = logging;
@@ -38,18 +31,10 @@ public class AopController {
 
     @Around("range()")
     public Object mainController(ProceedingJoinPoint joinPoint) throws Throwable {
-
-        long startTime = System.nanoTime() ;
-        UUID uuid = UUID.randomUUID() ;
-
         try {
-            logging.logTrace(String.join("", uuid.toString(), ARROW_TO_RIGHT_FOR_LOG, joinPoint.getSignature().toShortString()), true);
+            logging.logTrace(joinPoint.getSignature().toShortString(), true);
             Object ret = joinPoint.proceed() ;
-            logging.logTrace(String.join("", uuid.toString(), ARROW_TO_RIGHT_FOR_LOG, joinPoint.getSignature().toShortString()), false);
-
-            long endTime = System.nanoTime() ;
-
-            log.info("PROCESS TIME : {}  ", (endTime - startTime)) ;
+            logging.logTrace(joinPoint.getSignature().toShortString(), false);
 
             return ret ;
 
