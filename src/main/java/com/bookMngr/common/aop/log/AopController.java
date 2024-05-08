@@ -1,5 +1,6 @@
 package com.bookMngr.common.aop.log;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
+@Slf4j
 public class AopController {
 
     private final Logging logging ;
@@ -39,7 +41,7 @@ public class AopController {
             return ret ;
 
         } catch (Exception e1){
-            logging.getTraceLogger().error(e1.getMessage());
+            log.error(e1.getMessage());
             throw e1 ;
         }
 
