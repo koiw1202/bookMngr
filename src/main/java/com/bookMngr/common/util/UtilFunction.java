@@ -1,5 +1,7 @@
 package com.bookMngr.common.util;
 
+import java.lang.reflect.Field;
+
 /**
  * description    :
  * ===========================================================
@@ -13,4 +15,21 @@ public class UtilFunction {
         return (pageNo - 1) * pageSize ;
     }
 
+    public static void reflectionFields(Object obj, Object target) throws Exception {
+
+        Field[] fieldArr = obj.getClass().getDeclaredFields() ;
+        Field[] targetField = target.getClass().getDeclaredFields() ;
+
+        for(Field i : targetField) {
+            for(Field j : fieldArr) {
+
+                if(j.getName().equals(i.getName())) {
+                    i.setAccessible(true) ;
+                    j.setAccessible(true) ;
+
+                    i.set(target, j.get(obj)) ;
+                }
+            }
+        }
+    }
 }
