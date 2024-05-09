@@ -33,11 +33,13 @@ final public class ApiResponse <T> {
                         .message(message)
                         .data(data)
                         .build(),
-                null
+                null,
+                OK_STATUS
         ) ;
     }
 
     public static ResponseEntity ok(String message, Object data, HttpHeaders headers) {
+
         return new ResponseEntity(ApiResponse.builder()
                 .code(OK_CODE)
                 .status(OK_STATUS)

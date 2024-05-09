@@ -16,10 +16,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -94,6 +91,11 @@ public class MemberController {
 
         return ApiResponse.ok("성공적으로 로그인되었습니다.", null, new HttpHeaders(headerMap)) ;
 
+    }
+
+    @GetMapping("/v1.0.0/getUserByMybatis")
+    public HttpEntity getUserByMybatis() {
+        return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.getUserInfoByMyBatis()) ;
     }
 }
 

@@ -51,7 +51,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     /** DB */
-    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'com.mysql:mysql-connector-j'
+    implementation('org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0')
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -80,11 +82,10 @@ dependencies {
 
     /** restTemplate */
     implementation 'org.apache.httpcomponents:httpclient'
-//    implementation 'com.google.code.gson:gson:2.8.5'
 
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
-    testAnnotationProcessor 'org.projectlombok:lombok' //추가
+
 
 }
 

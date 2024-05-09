@@ -27,6 +27,15 @@ spring:
     username: root
     password: Abcd123@
 
+# MyBatis 관련 설정
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.bookMngr.common.dao
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    jdbc-type-for-null: varchar
+
 # 서버 config 관련 설정
 server:
   port: 8080

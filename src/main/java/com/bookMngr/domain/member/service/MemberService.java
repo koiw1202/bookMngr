@@ -1,7 +1,9 @@
 package com.bookMngr.domain.member.service;
 
+import com.bookMngr.common.dao.user.SelectUserOutDao;
 import com.bookMngr.common.error.ErrorCode;
 import com.bookMngr.common.error.ErrorHandler;
+import com.bookMngr.common.mybatis.mapper.UserMapper;
 import com.bookMngr.common.restTemplate.HttpProtocol;
 import com.bookMngr.common.restTemplate.RestTemplateUtil;
 import com.bookMngr.domain.member.domain.Member;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -44,6 +47,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository ;
     private final RestTemplateUtil restTemplateUtil ;
+    private final UserMapper userMapper ;
 
     public MemberForResDto joinMember(final MemberForServiceDto memberForServiceDto) {
 
@@ -98,6 +102,10 @@ public class MemberService {
         log.info("responseVO : {}", responseEntity.getHeaders()) ;
 
         return null ;
+    }
+
+    public List<SelectUserOutDao> getUserInfoByMyBatis() {
+        return userMapper.selectUser() ;
     }
 
 }
