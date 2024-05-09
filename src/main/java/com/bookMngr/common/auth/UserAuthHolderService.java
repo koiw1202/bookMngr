@@ -21,7 +21,7 @@ public class UserAuthHolderService {
     private final TokenManagement tokenManagement ;
 
     public UserAuthHolderService(TokenManagement tokenManagement) {
-        this.tokenManagement = tokenManagement;
+        this.tokenManagement = tokenManagement ;
         this.threadHolder = new InheritableThreadLocal<>() ;
     }
 

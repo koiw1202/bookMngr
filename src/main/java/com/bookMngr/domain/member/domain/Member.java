@@ -5,6 +5,7 @@ import com.bookMngr.common.code.MemberGrantType;
 import com.bookMngr.common.constant.CCConst;
 import com.bookMngr.domain.member.model.res.MemberForServiceDto;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -24,18 +25,18 @@ import java.sql.Timestamp;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@TableGenerator(
-        name = "MEMBER_SEQ_GENERATOR",
-        table = "sequence_all",
-        pkColumnValue = "MEMBER_SEQ",
-        allocationSize = 1
-)
+//@TableGenerator(
+//        name = "MEMBER_SEQ_GENERATOR",
+//        table = "sequence_all",
+//        pkColumnValue = "MEMBER_SEQ",
+//        allocationSize = 1
+//)
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
-    private long memberCd ;
+//    @Id @GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GENERATOR")
+//    private long memberCd ;
 
-    @Column(name = "Member_ID", length = 15, unique = true, nullable = false)
+    @Id @Column(name = "Member_ID", length = 15, unique = true, nullable = false)
     private String memberId ;
 
     @Column(length = 200, nullable = false)
@@ -65,6 +66,7 @@ public class Member {
     private Timestamp regerDt ;
 
     @Column(nullable = false)
+    @ColumnDefault("1")
     private Integer loginCnt ;
 
     @Builder
@@ -79,7 +81,7 @@ public class Member {
         this.memberGrant = MemberGrantType.U ;
         this.phoneNumber = memberForServiceDto.getPhoneNumber();
         this.regerDt = new Timestamp(System.currentTimeMillis()) ;
-
+        this.loginCnt = 1 ;
     }
 
 }

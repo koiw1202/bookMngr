@@ -45,11 +45,6 @@ public class MemberService {
     private final MemberRepository memberRepository ;
     private final RestTemplateUtil restTemplateUtil ;
 
-    private BooleanExpression memberIdEq(final String memberId) {
-        return hasText(memberId) ? member.memberCd.eq(Long.valueOf(memberId)) : null ;
-    }
-
-
     public MemberForResDto joinMember(final MemberForServiceDto memberForServiceDto) {
 
         Member existMember = memberRepository.checkMemberIdExist(memberForServiceDto.getMemberId()) ;
@@ -95,7 +90,6 @@ public class MemberService {
                 .body(new HashMap<String, Object>() {{
                     put("memberGrade", member.getMemberGrade()) ;
                     put("memberGrant", member.getMemberGrant()) ;
-                    put("memberCd", String.valueOf(member.getMemberCd())) ;
                 }})
                 .headers(null)
                 .build() ;

@@ -31,10 +31,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
         return hasText(memberId) ? member.memberId.eq(memberId) : null ;
     }
 
-    private BooleanExpression memberCdEq(final Long memberCd) {
-        return hasText(String.valueOf(memberCd)) ? member.memberCd.eq(memberCd) : null ;
-    }
-
     private BooleanExpression passwordEq(final String password) {
         return hasText(password) ? member.password.eq(password) : null ;
     }

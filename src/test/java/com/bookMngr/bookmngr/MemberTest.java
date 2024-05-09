@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.util.HashMap;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -34,6 +35,7 @@ public class MemberTest {
 
         String content = new ObjectMapper().writeValueAsString(
             new HashMap<String, String>(){{
+
                put("memberId", "abcd123") ;
                put("password", "1q2w3e4r!") ;
                put("phoneNumber", "01012341234") ;
@@ -47,9 +49,8 @@ public class MemberTest {
                    .content(content)
                    .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk())
+        .andDo(print())
         .andReturn() ;
-
-        log.info(" Result -----> {}", mvcResult.getResponse().getContentAsString()) ;
 
     }
 

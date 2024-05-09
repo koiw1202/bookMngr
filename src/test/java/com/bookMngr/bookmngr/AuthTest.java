@@ -4,6 +4,7 @@ import com.bookMngr.common.auth.UserAuthProvider;
 import com.bookMngr.common.code.PAYLOAD_TYPE;
 import com.bookMngr.common.jwt.TokenManagement;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("local")
 @AutoConfigureMockMvc
-@Slf4j
+@Log4j2
 public class AuthTest {
 
     @Autowired

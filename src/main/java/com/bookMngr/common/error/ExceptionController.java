@@ -4,6 +4,7 @@ import com.bookMngr.common.constant.CCConst;
 import com.bookMngr.common.response.ApiResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +21,7 @@ import static com.bookMngr.common.constant.CCConst.ARGUMENT_NOT_VALID;
 public class ExceptionController {
 
     @ExceptionHandler({SQLIntegrityConstraintViolationException.class})
-    public ApiResponse handleException(SQLIntegrityConstraintViolationException errorHandler) {
+    public ResponseEntity handleException(SQLIntegrityConstraintViolationException errorHandler) {
 
         log.error("SQLIntegrityConstraintViolationException ---> {}", errorHandler) ;
 
@@ -29,7 +30,7 @@ public class ExceptionController {
     }
 
     @ExceptionHandler({ErrorHandler.class})
-    public HttpEntity handleException(ErrorHandler errorHandler) {
+    public ResponseEntity handleException(ErrorHandler errorHandler) {
 
         log.error("ErrorHandler ---> {}", errorHandler) ;
 
@@ -38,7 +39,7 @@ public class ExceptionController {
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    public HttpEntity handleException(MethodArgumentNotValidException exception) {
+    public ResponseEntity handleException(MethodArgumentNotValidException exception) {
 
         List<FieldError> fieldError = exception.getFieldErrors() ;
 
