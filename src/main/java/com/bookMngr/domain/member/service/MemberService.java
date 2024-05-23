@@ -11,6 +11,7 @@ import com.bookMngr.domain.member.model.ChngMemberInfoForSerDto;
 import com.bookMngr.domain.member.model.MemberLoginForServiceDto;
 import com.bookMngr.domain.member.model.res.MemberForResDto;
 import com.bookMngr.domain.member.model.res.MemberForServiceDto;
+import com.bookMngr.domain.member.repository.MemberNativeRepository;
 import com.bookMngr.domain.member.repository.MemberRepository;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AllArgsConstructor;
@@ -44,12 +45,13 @@ import static org.springframework.util.StringUtils.hasText;
 @Service
 @AllArgsConstructor
 @Slf4j
-@Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
+//@Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
 public class MemberService {
 
     private final MemberRepository memberRepository ;
     private final RestTemplateUtil restTemplateUtil ;
     private final UserMapper userMapper ;
+    private final MemberNativeRepository memberNativeRepository ;
 
     public MemberForResDto joinMember(final MemberForServiceDto memberForServiceDto) {
 
@@ -111,16 +113,15 @@ public class MemberService {
         return userMapper.selectUser() ;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Integer joinUserInfoByMyBatis() {
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class} )
+    public Integer joinUserInfoByMyBatis() throws Exception {
 
         LocalDateTime.now().getNano();
-
 
         Member member = Member.builder()
                 .memberForServiceDto(MemberForServiceDto.builder().memberId("TEST" + String.valueOf(LocalDateTime.now().getNano()))
                         .password("12345")
-                        .phoneNumber("010-1234-5678")
+                        .phoneNumber("0000000")
                         .nickNm("123")
                         .rstYn("Y")
                         .unregYn("Y")
@@ -128,22 +129,12 @@ public class MemberService {
                         .build()
                 ).build() ;
 
-        userMapper.joinUserInfoByMyBatis(member) ;
-        return 0 ;
+        memberNativeRepository.insertTestFunc() ;
+
+        if(1==1)
+            throw new RuntimeException() ;
+
+        return userMapper.joinUserInfoByMyBatis(member);
+
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

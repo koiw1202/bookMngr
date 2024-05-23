@@ -69,6 +69,9 @@ public class Member {
     @ColumnDefault("1")
     private Integer loginCnt ;
 
+    @Transient
+    private Integer seq ;
+
     @Builder
     public Member(MemberForServiceDto memberForServiceDto) {
 

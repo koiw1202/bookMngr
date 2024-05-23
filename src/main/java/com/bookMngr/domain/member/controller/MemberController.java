@@ -95,12 +95,16 @@ public class MemberController {
 
     @GetMapping("/v1.0.0/myBatis/user")
     public HttpEntity getUserByMybatis() {
+
         return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.getUserInfoByMyBatis()) ;
+
     }
 
     @PostMapping("/v1.0.0/myBatis/user")
-    public HttpEntity joinUserByMybatis() {
-        return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.joinUserInfoByMyBatis()) ;
+    public HttpEntity joinUserByMybatis() throws Exception {
+
+        return ApiResponse.ok(CCConst.MERGE_SUCCESS, memberService.joinUserInfoByMyBatis()) ;
+
     }
 }
 

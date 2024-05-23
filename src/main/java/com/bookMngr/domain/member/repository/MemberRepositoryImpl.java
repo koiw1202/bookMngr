@@ -2,10 +2,16 @@ package com.bookMngr.domain.member.repository;
 
 import com.bookMngr.common.auth.UserAuthProvider;
 import com.bookMngr.common.code.PAYLOAD_TYPE;
+import com.bookMngr.common.mybatis.mapper.UserMapper;
 import com.bookMngr.domain.member.domain.Member;
 import com.bookMngr.domain.member.model.ChngMemberInfoForSerDto;
+import com.bookMngr.domain.member.model.res.MemberForServiceDto;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 import static com.bookMngr.domain.member.domain.QMember.member;
 import static org.springframework.util.StringUtils.hasText;
@@ -21,6 +27,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory ;
     private final UserAuthProvider userAuthProvider ;
+
 
     public MemberRepositoryImpl(JPAQueryFactory jpaQueryFactory, UserAuthProvider userAuthProvider) {
         this.jpaQueryFactory = jpaQueryFactory;

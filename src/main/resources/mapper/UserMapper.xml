@@ -22,19 +22,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="joinUserInfoByMyBatis">
-        <selectKey>
-
+        <selectKey resultType="int" keyProperty="seq" order="BEFORE">
+            SELECT MAX(member_cd) + 1
+              from bookmngr.member
         </selectKey>
 
         INSERT INTO bookmngr.`member` (
           member_cd
         , member_grade
         , member_grant
-        , password) VALUES (
-          #{memberCd}
+        , password
+        , phone_number) VALUES (
+          #{seq}
         , #{memberGrade}
         , 'U'
         , #{password}
+        , #{phoneNumber}
         )
     </insert>
 
