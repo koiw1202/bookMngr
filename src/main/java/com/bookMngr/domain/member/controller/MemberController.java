@@ -93,27 +93,16 @@ public class MemberController {
 
     }
 
-    @GetMapping("/v1.0.0/getUserByMybatis")
+    @GetMapping("/v1.0.0/myBatis/user")
     public HttpEntity getUserByMybatis() {
         return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.getUserInfoByMyBatis()) ;
     }
+
+    @PostMapping("/v1.0.0/myBatis/user")
+    public HttpEntity joinUserByMybatis() {
+        return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.joinUserInfoByMyBatis()) ;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

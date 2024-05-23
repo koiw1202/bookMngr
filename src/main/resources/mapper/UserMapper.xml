@@ -21,4 +21,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          WHERE member_id = 'abcd123'
     </select>
 
+    <insert id="joinUserInfoByMyBatis">
+        <selectKey>
+
+        </selectKey>
+
+        INSERT INTO bookmngr.`member` (
+          member_cd
+        , member_grade
+        , member_grant
+        , password) VALUES (
+          #{memberCd}
+        , #{memberGrade}
+        , 'U'
+        , #{password}
+        )
+    </insert>
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

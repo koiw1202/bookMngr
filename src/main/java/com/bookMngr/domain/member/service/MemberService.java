@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,9 +106,32 @@ public class MemberService {
         return null ;
     }
 
+    @Transactional(readOnly = true)
     public List<SelectUserOutDao> getUserInfoByMyBatis() {
         return userMapper.selectUser() ;
     }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public Integer joinUserInfoByMyBatis() {
+
+        LocalDateTime.now().getNano();
+
+
+        Member member = Member.builder()
+                .memberForServiceDto(MemberForServiceDto.builder().memberId("TEST" + String.valueOf(LocalDateTime.now().getNano()))
+                        .password("12345")
+                        .phoneNumber("010-1234-5678")
+                        .nickNm("123")
+                        .rstYn("Y")
+                        .unregYn("Y")
+                        .unregYn("N")
+                        .build()
+                ).build() ;
+
+        userMapper.joinUserInfoByMyBatis(member) ;
+        return 0 ;
+    }
+
 
 }
 
