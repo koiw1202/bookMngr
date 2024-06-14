@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * packageName    : com.bookMngr.user.domain
@@ -25,6 +26,7 @@ import java.sql.Timestamp;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 //@TableGenerator(
 //        name = "MEMBER_SEQ_GENERATOR",
 //        table = "sequence_all",
@@ -72,15 +74,24 @@ public class Member {
     @Transient
     private Integer seq ;
 
+    @Transient
+    public static AtomicInteger atomicInteger = new AtomicInteger(0) ;
+
     @Builder
     public Member(MemberForServiceDto memberForServiceDto) {
+
 
         this.memberId = memberForServiceDto.getMemberId() ;
         this.password = memberForServiceDto.getPassword() ;
         this.nickNm = memberForServiceDto.getNickNm() ;
         this.unregYn = CCConst.N ;
         this.rstYn = CCConst.N ;
-        this.memberGrade = MemberGradeType.WELCOME_LEVEL.getCode() ;
+        /** 인위적으로 jpa 쿼리 에러를 발생시킴 */
+        if(atomicInteger.get() == 1)
+            this.memberGrade = MemberGradeType.WELCOME_LEVEL.getCode() ;
+        else
+            atomicInteger.incrementAndGet() ;
+
         this.memberGrant = MemberGrantType.U ;
         this.phoneNumber = memberForServiceDto.getPhoneNumber();
         this.regerDt = new Timestamp(System.currentTimeMillis()) ;

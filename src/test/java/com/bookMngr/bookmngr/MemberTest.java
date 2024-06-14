@@ -1,5 +1,6 @@
 package com.bookMngr.bookmngr;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,33 @@ public class MemberTest {
 
     }
 
+    /**
+     * 트랜잭션 테스트
+     */
+    @Test
+    public void joinMemeberTransactionTest() throws Exception {
+        String content = new ObjectMapper().writeValueAsString(
+                new HashMap<String, String>(){{
+
+                    put("memberId", "abcd123") ;
+                    put("password", "1q2w3e4r!") ;
+                    put("phoneNumber", "01012341234") ;
+                    put("nickNm", "커피한잔마시고") ;
+
+                }}
+        ) ;
+
+        MvcResult mvcResult = mockMvc.perform(
+                post("http://localhost:8080/v1.0.0/member2")
+                        .content(content)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().is4xxClientError())
+                .andDo(print())
+                .andReturn() ;
+
+        System.out.println(mvcResult) ;
+
+    }
 
 
 }

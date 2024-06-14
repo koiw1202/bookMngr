@@ -45,7 +45,6 @@ import static org.springframework.util.StringUtils.hasText;
 @Service
 @AllArgsConstructor
 @Slf4j
-//@Transactional(rollbackFor = {ErrorHandler.class, Exception.class}, propagation = Propagation.REQUIRED)
 public class MemberService {
 
     private final MemberRepository memberRepository ;
@@ -53,22 +52,33 @@ public class MemberService {
     private final UserMapper userMapper ;
     private final MemberNativeRepository memberNativeRepository ;
 
+    @Transactional(propagation = Propagation.REQUIRED, noRollbackFor = { RuntimeException.class })
+    public void joinMemberTest(MemberForServiceDto memberForServiceDto) {
+
+        /** 회원 가입 실패 */
+        this.joinMember(memberForServiceDto);
+
+        /** 회원 가입 성공 */
+        this.joinMember(memberForServiceDto);
+    }
+
+    @Transactional
     public MemberForResDto joinMember(final MemberForServiceDto memberForServiceDto) {
 
         Member existMember = memberRepository.checkMemberIdExist(memberForServiceDto.getMemberId()) ;
 
 //      중복된 계정이 있다면 예외처리
         Optional.ofNullable(existMember)
-                .ifPresent(vo -> {
-                    throw new ErrorHandler(EXIST_ID) ;
-                }) ;
+                .ifPresent(v -> new ErrorHandler(EXIST_ID)); ;
 
 //      회원가입 처리
         Member joinMemberEntity = memberRepository.save(
-                Member.builder()
+                 Member.builder()
                       .memberForServiceDto(memberForServiceDto)
                       .build()
         ) ;
+
+        log.info("joinMemberEntity => {}", joinMemberEntity ) ;
 
         return MemberForResDto.builder()
                 .regerDt(joinMemberEntity.getRegerDt())
@@ -77,7 +87,7 @@ public class MemberService {
 
     } //End of joinMember
 
-    public boolean chngMemberInfo(final ChngMemberInfoForSerDto chngMemberInfoForSerDto) {
+    public boolean chgMemberInfo(final ChngMemberInfoForSerDto chngMemberInfoForSerDto) {
 
         Long result = memberRepository.updateMember(chngMemberInfoForSerDto) ;
 
@@ -137,4 +147,8 @@ public class MemberService {
         return userMapper.joinUserInfoByMyBatis(member);
 
     }
+
+
+
+
 }

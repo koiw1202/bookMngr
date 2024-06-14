@@ -42,6 +42,25 @@ public class MemberController {
     private final MemberService memberService ;
 
     @Operation(summary = "회원가입" , description = "회원가입 API")
+    @PostMapping("/v1.0.0/member2")
+    public HttpEntity joinMember2(@Valid @RequestBody final MemberDto memberDto) {
+
+        memberService.joinMemberTest(
+                MemberForServiceDto
+                        .builder()
+                        .memberId(memberDto.getMemberId())
+                        .password(memberDto.getPassword())
+                        .nickNm(memberDto.getNickNm())
+                        .rstYn(CCConst.N)
+                        .unregYn(CCConst.N)
+                        .phoneNumber(memberDto.getPhoneNumber())
+                        .build()
+        ) ;
+
+        return ApiResponse.ok(MEMBER_JOIN_SUCCESS, null) ;
+    }
+
+    @Operation(summary = "회원가입" , description = "회원가입 API")
     @PostMapping("/v1.0.0/member")
     public HttpEntity joinMember(@Valid @RequestBody final MemberDto memberDto) {
 
@@ -62,9 +81,9 @@ public class MemberController {
 
     @Operation(summary = "회원정보 변경" , description = "회원정보 변경 관련 API")
     @PutMapping("/v1.0.0/member")
-    public HttpEntity chngMemberInfo(@Valid @RequestBody ChngMemberInfoDto chngMemberInfoDto) {
+    public HttpEntity chgMemberInfo(@Valid @RequestBody ChngMemberInfoDto chngMemberInfoDto) {
 
-        return memberService.chngMemberInfo(
+        return memberService.chgMemberInfo(
                 ChngMemberInfoForSerDto
                         .builder()
                         .nickNm(chngMemberInfoDto.getNickNm())

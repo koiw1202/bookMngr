@@ -1,22 +1,25 @@
 package com.bookMngr.common.config.mybatis;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.data.transaction.ChainedTransactionManager;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.List;
 
 @Configuration
+@RequiredArgsConstructor
 @MapperScan(value = "com.bookMngr.common.mybatis.mapper")
 public class MybatisConfig {
 
@@ -34,6 +37,8 @@ public class MybatisConfig {
 
     @Value("${mybatis.configuration.jdbc-type-for-null}")
     private JdbcType jdbcTypeForNull;
+
+    private final EntityManagerFactory entityManagerFactory ;
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception{
@@ -59,10 +64,23 @@ public class MybatisConfig {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
+
     @Bean
-    public DataSourceTransactionManager transactionManager(DataSource dataSource){
-        return new DataSourceTransactionManager(dataSource);
+    public ChainedTransactionManager transactionManager(DataSource dataSource){
+
+        // JPA transactionManager
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
+
+        // MYBATIS transactionManager
+        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+
+        // creates chained transaction manager
+        ChainedTransactionManager transactionManager = new ChainedTransactionManager(jpaTransactionManager, dataSourceTransactionManager);
+
+        return transactionManager;
+
     }
 
 }
-
