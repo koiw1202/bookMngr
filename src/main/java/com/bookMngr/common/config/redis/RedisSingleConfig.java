@@ -8,9 +8,12 @@ package com.bookMngr.common.config.redis;
  * 2023-11-24        koiw1       최초 생성
  */
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -33,6 +36,8 @@ import java.util.Map;
  * 2023-10-04         wizard.cwkim       first create
  */
 @Configuration(value = "redisSingleConfig")
+@RequiredArgsConstructor
+@Slf4j
 public class RedisSingleConfig {
 
     @Value("${spring.redis.host}")
@@ -43,6 +48,8 @@ public class RedisSingleConfig {
 
     @Value("${spring.redis.password}")
     private String redisPwd;
+
+    private final Environment environment ;
 
     @Bean
     public RedisTemplate<?, ?> redisTemplate() {
@@ -62,10 +69,17 @@ public class RedisSingleConfig {
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
+
         redisStandaloneConfiguration.setPassword(redisPwd); //redis에 비밀번호가 설정 되어 있는 경우 설정해주면 됩니다.
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration);
         return lettuceConnectionFactory;
     }
+
+    @Bean
+    public void environmentTest() {
+        log.info("environment Test ==> {}", this.environment.getProperty("auth.api-key.M"));
+    }
+
 }

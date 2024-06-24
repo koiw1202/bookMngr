@@ -1,10 +1,12 @@
 package com.bookMngr.common.aop.log;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,13 +19,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 @Log4j2
+@RequiredArgsConstructor
 public class AopController {
 
     private final Logging logging ;
 
-    public AopController(Logging logging) {
-        this.logging = logging;
-    }
 
     @Pointcut("  execution (* com.bookMngr.domain.auth.controller..*(..))" +
             " || execution (* com.bookMngr.domain.book.controller..*(..))" +
@@ -44,6 +44,5 @@ public class AopController {
             log.error(e1.getMessage());
             throw e1 ;
         }
-
     }
 }
