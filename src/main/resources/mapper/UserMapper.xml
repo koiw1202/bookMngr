@@ -5,7 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <mapper namespace="com.bookMngr.common.mybatis.mapper.UserMapper">
 
-    <select id="selectUser" resultType="SelectUserOutDao">
+    <select id="selectUser1" resultType="SelectUserOutDao">
+
         SELECT  member_cd
                ,login_cnt
                ,member_grade
@@ -17,8 +18,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                ,reger_dt
                ,rst_yn
                ,unreg_yn
+
          FROM MEMBER
+
          WHERE member_id = 'abcd123'
+
+    </select>
+
+    <select id="selectUser2" resultType="SelectUserOutDao">
+
+        SELECT member_cd
+             ,login_cnt
+             ,member_grade
+             ,member_grant
+             ,member_id
+             ,nick_nm
+             ,password
+             ,phone_number
+             ,reger_dt
+             ,rst_yn
+             ,unreg_yn
+
+        FROM MEMBER
+
+        WHERE member_id = 'abcd123'
+    </select>
+
+    <select id="selectUser3" resultType="SelectUserOutDao">
+        <![CDATA[
+        SELECT  member_cd
+             ,login_cnt
+             ,member_grade
+             ,member_grant
+             ,member_id
+             ,nick_nm
+             ,password
+             ,phone_number
+             ,reger_dt
+             ,rst_yn
+             ,unreg_yn
+
+        FROM MEMBER
+        /* 테스트 -> */
+
+        WHERE member_id = 'abcd123'
+        ]]>
+    </select>
+
+    <select id="selectUser4" resultType="SelectUserOutDao">
+
+        SELECT  member_cd
+             ,login_cnt
+             ,member_grade
+             ,member_grant
+             ,member_id
+             ,nick_nm
+             ,password
+             ,phone_number
+             ,reger_dt
+             ,rst_yn
+             ,unreg_yn
+
+        FROM MEMBER
+
+        WHERE member_id = #{userId}
     </select>
 
     <insert id="joinUserInfoByMyBatis">

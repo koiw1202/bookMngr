@@ -9,7 +9,13 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    List<SelectUserOutDao> selectUser() ;
+    List<SelectUserOutDao> selectUser1() ;
+
+    List<SelectUserOutDao> selectUser2() ;
+
+    List<SelectUserOutDao> selectUser3() ;
+
+    List<SelectUserOutDao> selectUser4(String userId) ;
 
     Integer joinUserInfoByMyBatis(Member member) ;
 }

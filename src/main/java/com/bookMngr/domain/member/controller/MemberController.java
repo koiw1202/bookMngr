@@ -112,11 +112,14 @@ public class MemberController {
 
     }
 
-    @GetMapping("/v1.0.0/myBatis/user")
-    public HttpEntity getUserByMybatis() {
+    @GetMapping("/v1.0.0/myBatis/user1")
+    public HttpEntity getUserByMybatis1() {
+        return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.getUserInfoByMyBatis3()) ;
+    }
 
-        return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.getUserInfoByMyBatis()) ;
-
+    @GetMapping("/v1.0.0/myBatis/user2")
+    public HttpEntity getUserByMybatis2() {
+        return ApiResponse.ok(CCConst.SELECT_SUCCESS, memberService.getUserInfoByMyBatis4()) ;
     }
 
     @PostMapping("/v1.0.0/myBatis/user")

@@ -119,8 +119,27 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public List<SelectUserOutDao> getUserInfoByMyBatis() {
-        return userMapper.selectUser() ;
+    public List<SelectUserOutDao> getUserInfoByMyBatis1() {
+
+        return userMapper.selectUser1() ;
+    }
+
+    @Transactional(readOnly = true)
+    public List<SelectUserOutDao> getUserInfoByMyBatis2() {
+
+        return userMapper.selectUser2() ;
+    }
+
+    @Transactional(readOnly = true)
+    public List<SelectUserOutDao> getUserInfoByMyBatis3() {
+
+        return userMapper.selectUser3() ;
+    }
+
+    @Transactional(readOnly = true)
+    public List<SelectUserOutDao> getUserInfoByMyBatis4() {
+
+        return userMapper.selectUser4("test123") ;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class} )
